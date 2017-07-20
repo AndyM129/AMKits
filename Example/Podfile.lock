@@ -1,0 +1,16 @@
+PODS:
+  - AMKits (0.1.0)
+
+DEPENDENCIES:
+  - AMKits (from `../`)
+
+EXTERNAL SOURCES:
+  AMKits:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AMKits: fe307c77987e3bd354c8fd6c68514e4c50912abb
+
+PODFILE CHECKSUM: 8528e3fb9e5a36526f6c260b45ba3ddf43aaae94
+
+COCOAPODS: 1.2.1

@@ -1,0 +1,6 @@
+framework module AMKits {
+  umbrella header "AMKits-umbrella.h"
+
+  export *
+  module * { export * }
+}
