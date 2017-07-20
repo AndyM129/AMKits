@@ -1,9 +1,13 @@
 # AMKits
 
-[![CI Status](http://img.shields.io/travis/AndyM129/AMKits.svg?style=flat)](https://travis-ci.org/AndyM129/AMKits)
+[![Platform](https://img.shields.io/cocoapods/p/AMKits.svg?style=flat)](http://cocoapods.org/pods/AMKits)
+[![Language](https://img.shields.io/badge/Language-%20Objective%20C%20-blue.svg)]()
+[![Support](https://img.shields.io/badge/support-iOS%208%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)
 [![Version](https://img.shields.io/cocoapods/v/AMKits.svg?style=flat)](http://cocoapods.org/pods/AMKits)
 [![License](https://img.shields.io/cocoapods/l/AMKits.svg?style=flat)](http://cocoapods.org/pods/AMKits)
-[![Platform](https://img.shields.io/cocoapods/p/AMKits.svg?style=flat)](http://cocoapods.org/pods/AMKits)
+[![Weibo](https://img.shields.io/badge/Sina微博-@Developer_Andy-orange.svg?style=flat)](http://weibo.com/u/5271489088)
+[![GitHub stars](https://img.shields.io/github/stars/AndyM129/AMKits.svg)](https://github.com/AndyM129/AMKits/stargazers)
+[![Download](https://img.shields.io/cocoapods/dt/AMKits.svg)](https://github.com/AndyM129/AMKits/archive/master.zip)
 
 
 ## Example
