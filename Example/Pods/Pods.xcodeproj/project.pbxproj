@@ -7,16 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		031C6E29CA2A25E4DBADEAF5F009CB5A /* AMKits-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE753A081D2D712C0E2B90C3BC9F64A /* AMKits-dummy.m */; };
-		0996782D1A8C181F72FE72B6F587BD73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
+		02ACEA3517D9AF2C4014883D1AFC946A /* NSObject+AMKLocaleDescription.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD1BF46B7075538F6AF67D41A03BBCF /* NSObject+AMKLocaleDescription.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0C1220262A06859B1E9AB842242170EB /* NSObject+AMKDeallocBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = B6826826E7019E75A42FA26C393616C8 /* NSObject+AMKDeallocBlock.m */; };
+		1538C64D0CAB19E684505464E49A602C /* NSObject+AMKLocaleDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = A0EA9CF25CC45FC4741BC5EC38B6F6C1 /* NSObject+AMKLocaleDescription.m */; };
+		1B66E4B143A942BD38CE8F978ECD5693 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */; };
+		20303B585CD9C6FDCC111707E0741464 /* ReplaceMe.m in Sources */ = {isa = PBXBuildFile; fileRef = F802FC8F19E714DB72C866FC59A38A72 /* ReplaceMe.m */; };
+		2EFA6F4E26A8EDFE23E34544028ACCBF /* UIView+AMKExtendTouchRect.h in Headers */ = {isa = PBXBuildFile; fileRef = 599190E388F5FE2B539ADAA0202685E2 /* UIView+AMKExtendTouchRect.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45E90C584ADD2C0F7E27499AFA9EBB51 /* Pods-AMKits_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 366CE6DF9B5F0203DF7C35C2F3896F76 /* Pods-AMKits_Tests-dummy.m */; };
 		6189BA143CEA53DEFBFEFE95E510DB30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
-		6456EB2D9B12B44948B5A96C9B480C2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */; };
 		79D84EA389EC0B1FFC23534BC102F3AE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
+		7E5524D63FCA546162126C69436C1354 /* UIViewController+AMKLifeCircleBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F9D38F559FA36E5AC4F429EAD66215 /* UIViewController+AMKLifeCircleBlock.m */; };
+		965FD3BECFD1E8BC6730BEB565A2E871 /* UIViewController+AMKViewControllerSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1801D4691D478F3EDAB4A53BD398957E /* UIViewController+AMKViewControllerSwitch.m */; };
 		9861F07A7AEA954BB6FDC234C2A17FA7 /* Pods-AMKits_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 68302C32A9249068BD3E8FB31FCA54C4 /* Pods-AMKits_Example-dummy.m */; };
 		9E2A2A72A8CBA6FC5B7BFCDBC0654545 /* Pods-AMKits_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CA4754EA00EB39D13CE21752B61CBF53 /* Pods-AMKits_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C2B1B6CB8164C653D6BA9912CE6983D1 /* AMKits-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 06BC66485491B0C50E77DA2D19E55522 /* AMKits-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C483C8B979F0A2ED661F9AE536E20C6A /* ReplaceMe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FB5358EDCC32617C4AC683CC0B52F /* ReplaceMe.m */; };
+		A5F46A24DB5303F258D3DF6E22F72CF8 /* UIViewController+AMKViewControllerSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = EB22FD83177B272214E32F011A30470D /* UIViewController+AMKViewControllerSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4A001096125BCB399A2DD392F73E18A /* AMKits-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 06BC66485491B0C50E77DA2D19E55522 /* AMKits-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA2F69B61A14A24CB8C16C801A765484 /* NSObject+AMKDeallocBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 20057999EC2E03F75520C95C9143116D /* NSObject+AMKDeallocBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C2D2BFBFCE3B19DB33767B0490307B85 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */; };
+		DF029932934240A0DF58A556557B83B9 /* UIViewController+AMKLifeCircleBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = F9D4947EEEAA3AFC4AC7F01E01FCA447 /* UIViewController+AMKLifeCircleBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E44B4AC642C44B606BD90468F710C332 /* AMKits-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE753A081D2D712C0E2B90C3BC9F64A /* AMKits-dummy.m */; };
+		F83F93AD4443D42AF92D8CE29CAF6649 /* UIView+AMKExtendTouchRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8B1A0826B17F569F6A72FB9BCE7E5 /* UIView+AMKExtendTouchRect.m */; };
 		FC56DAE3DBB67616138106C1D380B704 /* Pods-AMKits_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EA02F5219C41FB3252B34EDE1B031A6 /* Pods-AMKits_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -25,28 +35,32 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D9F095DD014014F3935875F4240CF88D;
+			remoteGlobalIDString = 05F69387F18A968E4FB801A2869653AC;
 			remoteInfo = AMKits;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		024E7003A2CC7C3FD7CC21FF137CB519 /* ReplaceMe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ReplaceMe.m; sourceTree = "<group>"; };
 		06BC66485491B0C50E77DA2D19E55522 /* AMKits-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AMKits-umbrella.h"; sourceTree = "<group>"; };
 		078DD203C074F64FEB75384B3F877E3C /* Pods-AMKits_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AMKits_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		0ACE289C4FF2B0E229D9EA24B392DC21 /* Pods-AMKits_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AMKits_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0F5833C605A3318AF1B192227ADF0CC4 /* AMKits-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AMKits-prefix.pch"; sourceTree = "<group>"; };
+		1801D4691D478F3EDAB4A53BD398957E /* UIViewController+AMKViewControllerSwitch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMKViewControllerSwitch.m"; sourceTree = "<group>"; };
+		20057999EC2E03F75520C95C9143116D /* NSObject+AMKDeallocBlock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+AMKDeallocBlock.h"; sourceTree = "<group>"; };
 		20F8ED2911E224A2F8FA9CAB5076EE5A /* Pods-AMKits_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AMKits_Example-resources.sh"; sourceTree = "<group>"; };
 		2EA02F5219C41FB3252B34EDE1B031A6 /* Pods-AMKits_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AMKits_Example-umbrella.h"; sourceTree = "<group>"; };
 		366CE6DF9B5F0203DF7C35C2F3896F76 /* Pods-AMKits_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AMKits_Tests-dummy.m"; sourceTree = "<group>"; };
 		397187E37669BEC96860EE5886CF0EE3 /* Pods_AMKits_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AMKits_Tests.framework; path = "Pods-AMKits_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41321592B48626822CC84B3B246152F3 /* Pods-AMKits_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AMKits_Tests-resources.sh"; sourceTree = "<group>"; };
 		41A879DF1199A395B35E941B9834D167 /* Pods-AMKits_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AMKits_Example-frameworks.sh"; sourceTree = "<group>"; };
+		4BC8B1A0826B17F569F6A72FB9BCE7E5 /* UIView+AMKExtendTouchRect.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+AMKExtendTouchRect.m"; sourceTree = "<group>"; };
 		4E3CDD33AB727E5AF76CB41E9B934B46 /* Pods_AMKits_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_AMKits_Example.framework; path = "Pods-AMKits_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		599190E388F5FE2B539ADAA0202685E2 /* UIView+AMKExtendTouchRect.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+AMKExtendTouchRect.h"; sourceTree = "<group>"; };
 		5A0D88ED77F5A54C3171921EB87F68E0 /* Pods-AMKits_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AMKits_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		5C8D47E8AA46332F76A3670ECB1811F4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F7321317654B7C8F8E31AA5774BDAC1 /* AMKits.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = AMKits.modulemap; sourceTree = "<group>"; };
 		68302C32A9249068BD3E8FB31FCA54C4 /* Pods-AMKits_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-AMKits_Example-dummy.m"; sourceTree = "<group>"; };
-		6F6FB5358EDCC32617C4AC683CC0B52F /* ReplaceMe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ReplaceMe.m; sourceTree = "<group>"; };
 		6FE753A081D2D712C0E2B90C3BC9F64A /* AMKits-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AMKits-dummy.m"; sourceTree = "<group>"; };
 		756799C4D15B4F9262ED597A220C93D0 /* Pods-AMKits_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-AMKits_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		798946AD45B3263F37F8792F16A2F962 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,16 +68,23 @@
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9A4874148F6C468D86124C698E3B9F20 /* Pods-AMKits_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AMKits_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9C020F8ACC23DB8CB6595A42D7A13F60 /* AMKits.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AMKits.xcconfig; sourceTree = "<group>"; };
+		A0EA9CF25CC45FC4741BC5EC38B6F6C1 /* NSObject+AMKLocaleDescription.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AMKLocaleDescription.m"; sourceTree = "<group>"; };
 		A5A8C79D96EA928225DEF634CE9A2F29 /* Pods-AMKits_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AMKits_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		B0A636D6939C5C88E39FDD46410A0A32 /* Pods-AMKits_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AMKits_Tests.modulemap"; sourceTree = "<group>"; };
 		B63C6A64CF66340668996F78DA6BB482 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		B6826826E7019E75A42FA26C393616C8 /* NSObject+AMKDeallocBlock.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AMKDeallocBlock.m"; sourceTree = "<group>"; };
 		C703E871A21FE593C85314FFDE8D2CB5 /* Pods-AMKits_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-AMKits_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		CA4754EA00EB39D13CE21752B61CBF53 /* Pods-AMKits_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AMKits_Tests-umbrella.h"; sourceTree = "<group>"; };
 		CFBD1A998B76C3D7588A3C3DAF96E52D /* Pods-AMKits_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AMKits_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		D3F9D38F559FA36E5AC4F429EAD66215 /* UIViewController+AMKLifeCircleBlock.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMKLifeCircleBlock.m"; sourceTree = "<group>"; };
 		D88AAE1F92055A60CC2FC970D7D34634 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D9F6406BAF91E4B907093CAABC1FFE4A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCD1BF46B7075538F6AF67D41A03BBCF /* NSObject+AMKLocaleDescription.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSObject+AMKLocaleDescription.h"; sourceTree = "<group>"; };
 		E3AED7B5364A5DD16388B40A5CB9F064 /* Pods-AMKits_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-AMKits_Example.modulemap"; sourceTree = "<group>"; };
+		EB22FD83177B272214E32F011A30470D /* UIViewController+AMKViewControllerSwitch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AMKViewControllerSwitch.h"; sourceTree = "<group>"; };
 		F7734C3B7E6E992D926506AC56B56937 /* AMKits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AMKits.framework; path = AMKits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F802FC8F19E714DB72C866FC59A38A72 /* ReplaceMe.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ReplaceMe.m; sourceTree = "<group>"; };
+		F9D4947EEEAA3AFC4AC7F01E01FCA447 /* UIViewController+AMKLifeCircleBlock.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AMKLifeCircleBlock.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,12 +96,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		26F2A9F2C604406804987D5714DAFA3E /* Frameworks */ = {
+		5A9782518DADDFC5439BFEF3903619CA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0996782D1A8C181F72FE72B6F587BD73 /* Foundation.framework in Frameworks */,
-				6456EB2D9B12B44948B5A96C9B480C2C /* UIKit.framework in Frameworks */,
+				C2D2BFBFCE3B19DB33767B0490307B85 /* Foundation.framework in Frameworks */,
+				1B66E4B143A942BD38CE8F978ECD5693 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +116,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03675F1364E0BDE9064709F7443B4B50 /* AMKits */ = {
+			isa = PBXGroup;
+			children = (
+				EB6CC8DDF4B68D717D34769D481A1638 /* Classes */,
+			);
+			name = AMKits;
+			path = AMKits;
+			sourceTree = "<group>";
+		};
+		0FC639510614C8294D4FB68974EF5E2E /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				20057999EC2E03F75520C95C9143116D /* NSObject+AMKDeallocBlock.h */,
+				B6826826E7019E75A42FA26C393616C8 /* NSObject+AMKDeallocBlock.m */,
+				DCD1BF46B7075538F6AF67D41A03BBCF /* NSObject+AMKLocaleDescription.h */,
+				A0EA9CF25CC45FC4741BC5EC38B6F6C1 /* NSObject+AMKLocaleDescription.m */,
+			);
+			name = Foundation;
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		172D6D94B8D7D761A9532EABB90726E0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +145,15 @@
 				397187E37669BEC96860EE5886CF0EE3 /* Pods_AMKits_Tests.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		351F7B198934947FC5D5BCE1DD079484 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				F802FC8F19E714DB72C866FC59A38A72 /* ReplaceMe.m */,
+			);
+			name = Libraries;
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		3C141EEE69FF4E16A4CA0046A2DEE896 /* Targets Support Files */ = {
@@ -131,6 +182,16 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		4F804080047694DAB3ECDF5C94D41DF4 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0FC639510614C8294D4FB68974EF5E2E /* Foundation */,
+				63E606C417AFC53F94F28F29D6909F0D /* UIKit */,
+			);
+			name = Categories;
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		57F96859CDD482BBF6A8B6A406622890 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,20 +203,25 @@
 		5A0581E00B6C609FBBAC3840F8AE6A37 /* AMKits */ = {
 			isa = PBXGroup;
 			children = (
-				8F88451D66C9AA8CBA650685BDC86C1B /* AMKits */,
+				03675F1364E0BDE9064709F7443B4B50 /* AMKits */,
 				AC4805E20872F9048B8C3ED4CD973E0E /* Support Files */,
 			);
 			name = AMKits;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		6C4B1C0D95706D4FEFBA2EC349E8A43B /* Classes */ = {
+		63E606C417AFC53F94F28F29D6909F0D /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
-				6F6FB5358EDCC32617C4AC683CC0B52F /* ReplaceMe.m */,
+				599190E388F5FE2B539ADAA0202685E2 /* UIView+AMKExtendTouchRect.h */,
+				4BC8B1A0826B17F569F6A72FB9BCE7E5 /* UIView+AMKExtendTouchRect.m */,
+				F9D4947EEEAA3AFC4AC7F01E01FCA447 /* UIViewController+AMKLifeCircleBlock.h */,
+				D3F9D38F559FA36E5AC4F429EAD66215 /* UIViewController+AMKLifeCircleBlock.m */,
+				EB22FD83177B272214E32F011A30470D /* UIViewController+AMKViewControllerSwitch.h */,
+				1801D4691D478F3EDAB4A53BD398957E /* UIViewController+AMKViewControllerSwitch.m */,
 			);
-			name = Classes;
-			path = Classes;
+			name = UIKit;
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		706866B36079F72229347D03218064B1 /* Pods-AMKits_Tests */ = {
@@ -176,6 +242,15 @@
 			path = "Target Support Files/Pods-AMKits_Tests";
 			sourceTree = "<group>";
 		};
+		789D941E72F9B3A1B82D92E96433B1CF /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				024E7003A2CC7C3FD7CC21FF137CB519 /* ReplaceMe.m */,
+			);
+			name = Base;
+			path = Base;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -185,15 +260,6 @@
 				172D6D94B8D7D761A9532EABB90726E0 /* Products */,
 				3C141EEE69FF4E16A4CA0046A2DEE896 /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		8F88451D66C9AA8CBA650685BDC86C1B /* AMKits */ = {
-			isa = PBXGroup;
-			children = (
-				6C4B1C0D95706D4FEFBA2EC349E8A43B /* Classes */,
-			);
-			name = AMKits;
-			path = AMKits;
 			sourceTree = "<group>";
 		};
 		AC4805E20872F9048B8C3ED4CD973E0E /* Support Files */ = {
@@ -228,14 +294,30 @@
 			path = "Target Support Files/Pods-AMKits_Example";
 			sourceTree = "<group>";
 		};
+		EB6CC8DDF4B68D717D34769D481A1638 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				789D941E72F9B3A1B82D92E96433B1CF /* Base */,
+				4F804080047694DAB3ECDF5C94D41DF4 /* Categories */,
+				351F7B198934947FC5D5BCE1DD079484 /* Libraries */,
+			);
+			name = Classes;
+			path = Classes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8B4C538498463A8B9539E74821A74840 /* Headers */ = {
+		38938F28AFBB7F0C58D5B314593F933D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2B1B6CB8164C653D6BA9912CE6983D1 /* AMKits-umbrella.h in Headers */,
+				B4A001096125BCB399A2DD392F73E18A /* AMKits-umbrella.h in Headers */,
+				BA2F69B61A14A24CB8C16C801A765484 /* NSObject+AMKDeallocBlock.h in Headers */,
+				02ACEA3517D9AF2C4014883D1AFC946A /* NSObject+AMKLocaleDescription.h in Headers */,
+				2EFA6F4E26A8EDFE23E34544028ACCBF /* UIView+AMKExtendTouchRect.h in Headers */,
+				DF029932934240A0DF58A556557B83B9 /* UIViewController+AMKLifeCircleBlock.h in Headers */,
+				A5F46A24DB5303F258D3DF6E22F72CF8 /* UIViewController+AMKViewControllerSwitch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +340,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		05F69387F18A968E4FB801A2869653AC /* AMKits */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37CF8A355ECC06379621D3D9C7546C7C /* Build configuration list for PBXNativeTarget "AMKits" */;
+			buildPhases = (
+				849A6BB43496675D0AEB95E080FB0E53 /* Sources */,
+				5A9782518DADDFC5439BFEF3903619CA /* Frameworks */,
+				38938F28AFBB7F0C58D5B314593F933D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AMKits;
+			productName = AMKits;
+			productReference = F7734C3B7E6E992D926506AC56B56937 /* AMKits.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		2823D69C2D0CE3CBC568B67588DD52FB /* Pods-AMKits_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0283BF7ACA3BD6E0F762DD5957170B85 /* Build configuration list for PBXNativeTarget "Pods-AMKits_Example" */;
@@ -293,23 +392,6 @@
 			productReference = 397187E37669BEC96860EE5886CF0EE3 /* Pods_AMKits_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D9F095DD014014F3935875F4240CF88D /* AMKits */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C77AFF0137890E6DC97A1B00AE48EA9 /* Build configuration list for PBXNativeTarget "AMKits" */;
-			buildPhases = (
-				ACEDF984CAB29EFF598B7B043E6D38DB /* Sources */,
-				26F2A9F2C604406804987D5714DAFA3E /* Frameworks */,
-				8B4C538498463A8B9539E74821A74840 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = AMKits;
-			productName = AMKits;
-			productReference = F7734C3B7E6E992D926506AC56B56937 /* AMKits.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -331,7 +413,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D9F095DD014014F3935875F4240CF88D /* AMKits */,
+				05F69387F18A968E4FB801A2869653AC /* AMKits */,
 				2823D69C2D0CE3CBC568B67588DD52FB /* Pods-AMKits_Example */,
 				94B6C9CE472625EAF046E5C8D8A1D591 /* Pods-AMKits_Tests */,
 			);
@@ -347,12 +429,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ACEDF984CAB29EFF598B7B043E6D38DB /* Sources */ = {
+		849A6BB43496675D0AEB95E080FB0E53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				031C6E29CA2A25E4DBADEAF5F009CB5A /* AMKits-dummy.m in Sources */,
-				C483C8B979F0A2ED661F9AE536E20C6A /* ReplaceMe.m in Sources */,
+				E44B4AC642C44B606BD90468F710C332 /* AMKits-dummy.m in Sources */,
+				0C1220262A06859B1E9AB842242170EB /* NSObject+AMKDeallocBlock.m in Sources */,
+				1538C64D0CAB19E684505464E49A602C /* NSObject+AMKLocaleDescription.m in Sources */,
+				20303B585CD9C6FDCC111707E0741464 /* ReplaceMe.m in Sources */,
+				20303B585CD9C6FDCC111707E0741464 /* ReplaceMe.m in Sources */,
+				F83F93AD4443D42AF92D8CE29CAF6649 /* UIView+AMKExtendTouchRect.m in Sources */,
+				7E5524D63FCA546162126C69436C1354 /* UIViewController+AMKLifeCircleBlock.m in Sources */,
+				965FD3BECFD1E8BC6730BEB565A2E871 /* UIViewController+AMKViewControllerSwitch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +458,7 @@
 		381B2AB5549BCF893369EA58305425E7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AMKits;
-			target = D9F095DD014014F3935875F4240CF88D /* AMKits */;
+			target = 05F69387F18A968E4FB801A2869653AC /* AMKits */;
 			targetProxy = EA6AEB6C542C46DAB0F53DAAC26AE34E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -411,6 +499,38 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		2317B013D77F54D5B947E547179FC471 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C020F8ACC23DB8CB6595A42D7A13F60 /* AMKits.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AMKits/AMKits-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/AMKits/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/AMKits/AMKits.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AMKits;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		345CC476DF4A7516DBD2220CF5035FF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -488,38 +608,6 @@
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Pods_AMKits_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		708DCF560496822F49A02D23D4AEC558 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C020F8ACC23DB8CB6595A42D7A13F60 /* AMKits.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/AMKits/AMKits-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/AMKits/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/AMKits/AMKits.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = AMKits;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -608,7 +696,7 @@
 			};
 			name = Release;
 		};
-		C10D38BDB83232667D2C2F818F86BE3C /* Debug */ = {
+		B12979AFA78E3AED3372A5587AEE1449 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9C020F8ACC23DB8CB6595A42D7A13F60 /* AMKits.xcconfig */;
 			buildSettings = {
@@ -688,20 +776,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C77AFF0137890E6DC97A1B00AE48EA9 /* Build configuration list for PBXNativeTarget "AMKits" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C10D38BDB83232667D2C2F818F86BE3C /* Debug */,
-				708DCF560496822F49A02D23D4AEC558 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				345CC476DF4A7516DBD2220CF5035FF3 /* Debug */,
 				717E77604BFBB04BEAF56608A1CB2EDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37CF8A355ECC06379621D3D9C7546C7C /* Build configuration list for PBXNativeTarget "AMKits" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B12979AFA78E3AED3372A5587AEE1449 /* Debug */,
+				2317B013D77F54D5B947E547179FC471 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
