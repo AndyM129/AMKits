@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AMKits_Example' do
+  pod 'AMKits', :path => '../'
+
+  target 'AMKits_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
