@@ -29,6 +29,8 @@
     [super viewDidLoad];
     [self AMKDeallocBlock_Test];
     [self AMKViewControllerSwitch_Test];
+    
+//    self.isFirstResponder
 }
 
 #pragma mark - Test AMKDeallocBlock
