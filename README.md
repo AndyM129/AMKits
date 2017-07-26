@@ -34,6 +34,10 @@ pod "AMKits"
 
 ## Update History
 
+### 2017-07-20
+
+#### 优化 NSObject+AMKDeallocBlock.h，以支持对当前object的处理
+
 ### 2017-07-19
 
 #### 1. 搭建项目框架

@@ -12,7 +12,7 @@
 typedef NSString AMKDeallocBlockKey;
 
 /** AMKDeallocBlock */
-typedef void(^AMKDeallocBlock)(void);
+typedef void(^AMKDeallocBlock)(id object);
 
 /** 以默认格式生成当前的 AMKDeallocBlockKey */
 #define AMKDeallocBlockDefaultKey() [NSString stringWithFormat:@"%@(%d) %s Line%d", [NSDate new], arc4random()%900+100, __PRETTY_FUNCTION__, __LINE__]

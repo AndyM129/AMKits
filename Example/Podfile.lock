@@ -1,16 +1,22 @@
 PODS:
-  - AMKits (0.1.0)
+  - AMKits (0.1.1)
+  - Masonry (1.0.2)
+  - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
   - AMKits (from `../`)
+  - Masonry
+  - SVProgressHUD
 
 EXTERNAL SOURCES:
   AMKits:
     :path: ../
 
 SPEC CHECKSUMS:
-  AMKits: fe307c77987e3bd354c8fd6c68514e4c50912abb
+  AMKits: b861677f5e66b6dd30d568fac171f53796f54600
+  Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
-PODFILE CHECKSUM: 8528e3fb9e5a36526f6c260b45ba3ddf43aaae94
+PODFILE CHECKSUM: abf5d9c1c590459b786ff55c56f732fdb7816a62
 
 COCOAPODS: 1.2.1

@@ -2,6 +2,8 @@ use_frameworks!
 
 target 'AMKits_Example' do
   pod 'AMKits', :path => '../'
+  pod 'Masonry'
+  pod 'SVProgressHUD'
 
   target 'AMKits_Tests' do
     inherit! :search_paths

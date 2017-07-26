@@ -32,7 +32,7 @@
     for (AMKDeallocBlockKey *deallocBlockKey in deallocBlocks) {
         AMKDeallocBlock deallocBlock = [self.amk_deallocBlocks objectForKey:deallocBlockKey];
         //NSLog(@"开始执行AMKDeallocBlock：%@", deallocBlockKey);
-        deallocBlock();
+        deallocBlock(self);
         //NSLog(@"结束执行AMKDeallocBlock：%@", deallocBlockKey);
     }
     ((void(*)(id, SEL))objc_msgSend)(self, @selector(AMKDeallocBlock_dealloc));
