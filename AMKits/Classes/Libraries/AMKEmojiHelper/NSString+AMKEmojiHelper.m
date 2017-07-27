@@ -49,9 +49,12 @@
         __block NSString *withString = nil;
         __block NSMutableString *newText = [NSMutableString stringWithString:self];
         [[NSDictionary amk_emojiMappingOfUnicodeToCheatCodes] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            withString = block(key, ([obj isKindOfClass:[NSArray class]] ? [obj firstObject] : obj), stop) ?: @"";
-            if (!stop) {
+            BOOL stopReplacing = NO;
+            withString = block(key, ([obj isKindOfClass:[NSArray class]] ? [obj firstObject] : obj), &stopReplacing) ?: @"";
+            if (!stopReplacing) {
                 [newText replaceOccurrencesOfString:key withString:withString options:NSLiteralSearch range:NSMakeRange(0, newText.length)];
+            } else {
+                *stop = YES;
             }
         }];
         return newText;
@@ -64,9 +67,12 @@
         __block NSString *withString = nil;
         __block NSMutableString *newText = [NSMutableString stringWithString:self];
         [[NSDictionary amk_emojiMappingOfCheatCodesToUnicode] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-            withString = block(key, obj, stop) ?: @"";
-            if (!stop) {
+            BOOL stopReplacing = NO;
+            withString = block(key, obj, &stopReplacing) ?: @"";
+            if (!stopReplacing) {
                 [newText replaceOccurrencesOfString:key withString:withString options:NSLiteralSearch range:NSMakeRange(0, newText.length)];
+            } else {
+                *stop = YES;
             }
         }];
         return newText;

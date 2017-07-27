@@ -44,15 +44,32 @@
         NSLog(@"%@", error);
     } else {
         // 验证是否含有emoji
-        BOOL containsEmojiInUnicode = [testText amk_containsEmojiInUnicode];
-        BOOL containsEmojiInCheatCodes = [testText amk_containsEmojiInCheatCodes];
-        NSLog(@"containsEmojiInUnicode: %@", containsEmojiInUnicode?@"YES":@"NO");
-        NSLog(@"containsEmojiInCheatCodes: %@", containsEmojiInCheatCodes?@"YES":@"NO");
+//        BOOL containsEmojiInUnicode = [testText amk_containsEmojiInUnicode];
+//        BOOL containsEmojiInCheatCodes = [testText amk_containsEmojiInCheatCodes];
+//        NSLog(@"containsEmojiInUnicode: %@", containsEmojiInUnicode?@"YES":@"NO");
+//        NSLog(@"containsEmojiInCheatCodes: %@", containsEmojiInCheatCodes?@"YES":@"NO");
         
-        // 转码测试
-//        testText = [testText amk_stringByReplacingEmojiUnicodeWithCheatCodes];
-//        //testText = [testText amk_stringByReplacingEmojiCheatCodesWithUnicode];
-//        NSLog(@"%@", testText);
+        // emoji替换测试
+        NSString *replacingEmojiCheatCodesTest1 = [testText amk_stringByReplacingEmojiUnicodeWithString:^NSString *(NSString *unicode, NSString *cheatCodes, BOOL *stop) {
+            NSLog(@"=====");
+            *stop = YES;
+            return @"andy";
+        }];
+        NSLog(@"%@", replacingEmojiCheatCodesTest1);
+        
+//        NSString *replacingEmojiCheatCodesTest2 = [testText amk_stringByReplacingEmojiCheatCodesWithString:^NSString *(NSString *cheatCodes, NSString *unicode, BOOL *stop) {
+//            NSLog(@"+++++");
+//            *stop = NO;
+//            return @"andy";
+//        }];
+//        NSLog(@"%@", replacingEmojiCheatCodesTest2);
+//        
+//        // 转码测试
+//        NSString *replacingEmojiUnicodeWithCheatCodesTest = [testText amk_stringByReplacingEmojiUnicodeWithCheatCodes];
+//        NSLog(@"%@", replacingEmojiUnicodeWithCheatCodesTest);
+//
+//        NSString *replacingEmojiCheatCodesWithUnicode = [testText amk_stringByReplacingEmojiCheatCodesWithUnicode];
+//        NSLog(@"%@", replacingEmojiCheatCodesWithUnicode);
     }
 }
 
