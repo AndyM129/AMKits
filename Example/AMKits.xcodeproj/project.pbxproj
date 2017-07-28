@@ -24,6 +24,8 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		96F50051B79AD388CE6C7A73 /* Pods_AMKits_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5285FA29430CC76CE0736A52 /* Pods_AMKits_Tests.framework */; };
+		A17C45271F2A285A00C402BD /* EmojiMap_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A17C45251F2A285A00C402BD /* EmojiMap_1.txt */; };
+		A17C45281F2A285A00C402BD /* EmojiMap_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A17C45251F2A285A00C402BD /* EmojiMap_1.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,7 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99764DCD13727FF78AB237F5 /* AMKits.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AMKits.podspec; path = ../AMKits.podspec; sourceTree = "<group>"; };
+		A17C45251F2A285A00C402BD /* EmojiMap_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmojiMap_1.txt; sourceTree = "<group>"; };
 		A648116833F7F9A2595C6F1C /* Pods-AMKits_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Tests/Pods-AMKits_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2602DFA20C17A4EE72112A4 /* Pods-AMKits_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Example/Pods-AMKits_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B560A50DE75E3C9D11EC93FF /* Pods-AMKits_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Example/Pods-AMKits_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +151,7 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A17C45261F2A285A00C402BD /* Emoji */,
 				6003F595195388D20070C39A /* AMKits-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
@@ -183,6 +187,14 @@
 				0C107410F4630D5B15BCA0E0 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		A17C45261F2A285A00C402BD /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				A17C45251F2A285A00C402BD /* EmojiMap_1.txt */,
+			);
+			path = Emoji;
 			sourceTree = "<group>";
 		};
 		D62EED68BE09E797218840A8 /* Pods */ = {
@@ -279,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17C45271F2A285A00C402BD /* EmojiMap_1.txt in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
@@ -290,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A17C45281F2A285A00C402BD /* EmojiMap_1.txt in Resources */,
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

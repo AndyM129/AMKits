@@ -20,6 +20,9 @@
     "ios": "8.0"
   },
   "source_files": "AMKits/Classes/**/*.{h,m}",
+  "resources": [
+    "AMKits/Classes/**/*.{plist,jpg,png}"
+  ],
   "public_header_files": "AMKits/Classes/**/*.h",
   "frameworks": "UIKit"
 }

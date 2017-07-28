@@ -15,5 +15,6 @@
 
 #import "NSString+AMKEmojiHelper.h"
 #import "NSDictionary+AMKEmojiHelper.h"
+#import "AMKEmojiManager.h"
 
 #endif /* AMKEmojiHelper_h */

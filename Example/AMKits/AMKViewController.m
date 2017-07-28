@@ -30,7 +30,8 @@
     //[self AMKDeallocBlock_Test];
     //[self AMKViewControllerSwitch_Test];
     //[self AMKLogManager_Test];
-    [self AMKEmojiHelper_Test];
+    //[self AMKEmojiHelper_Test];
+    [self AMKEmojiHelper_Test4];
 }
 
 #pragma mark - AMKEmoji
@@ -86,6 +87,55 @@
         NSString *myUnicode = [cheatCodes amk_stringByReplacingEmojiCheatCodesWithUnicode];
         NSLog(@"%@ => %@\t\t%@\t\t\t%@", cheatCodes, unicode, myUnicode, [unicode isEqualToString:myUnicode]?@"":@"<<<<<<<<<<<<<<<<");
     }
+}
+
+/** 生成emoji映射表 */
+- (void)AMKEmojiHelper_Test3 {
+    NSError *error = nil;
+    NSString *categorieName = nil;                  //!< 分类名称
+    
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"EmojiMap_1" ofType:@"txt"];
+    NSString *text = [NSString stringWithContentsOfFile:plistPath encoding:NSUTF8StringEncoding error:&error];
+    NSArray *array = [text componentsSeparatedByString:@"\n"];
+    for (NSString *line in array) {
+        NSArray<NSString *> *values = [line componentsSeparatedByString:@"\t"];
+        if (values.count == 1) {
+            categorieName = values[0];
+        } else if (values.count == 3) {
+            NSString *unicode = values[0];
+            NSString *cheatCodes = [NSString stringWithFormat:@":%@:", values[2].underlineString];
+
+            NSArray *addedCheatCodesArray = nil;
+            AMKEmoji *emoji = [[AMKEmojiManager sharedManager] addEmojiWithCategoryName:categorieName unicode:unicode cheatCodesArray:@[cheatCodes] addedCheatCodesArray:&addedCheatCodesArray];
+            if (addedCheatCodesArray.count) {
+                NSLog(@"添加新的配置：%@, 最终如下\n[%@] %@", [addedCheatCodesArray componentsJoinedByString:@", "], categorieName, emoji);
+            }
+        }
+    }
+
+    [[AMKEmojiManager sharedManager] writeToFile:@"" atomically:YES];
+}
+
+/** 添加emoji映射表 */
+- (void)AMKEmojiHelper_Test4 {
+    NSString *defaultCategoryName = @"Other";
+    NSDictionary *unicodeToCheatCodesMap = [NSDictionary amk_emojiMappingOfUnicodeToCheatCodes];
+    for (NSString *unicode in unicodeToCheatCodesMap) {
+        NSArray  *cheatCodesArray = [unicodeToCheatCodesMap objectForKey:unicode];
+        if (![cheatCodesArray isKindOfClass:[NSArray class]]) {
+            cheatCodesArray = @[cheatCodesArray];
+        }
+        
+        NSString *categoryName = [defaultCategoryName copy];
+        NSArray *addedCheatCodesArray = nil;
+        AMKEmoji *emoji = [[AMKEmojiManager sharedManager] addEmojiWithUnicode:unicode cheatCodesArray:cheatCodesArray defaultCategoryName:&categoryName addedCheatCodesArray:&addedCheatCodesArray];
+        if (addedCheatCodesArray.count) {
+            NSLog(@"添加新的配置：%@, 最终如下\n[%@] %@", [addedCheatCodesArray componentsJoinedByString:@", "], categoryName, emoji);
+        }
+    }
+    [[AMKEmojiManager sharedManager] writeToFile:nil atomically:YES];
+    NSLog(@"%@", [AMKEmojiManager sharedManager]);
+
 }
 
 #pragma mark - AMKLogManager
