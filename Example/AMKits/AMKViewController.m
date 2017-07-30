@@ -31,7 +31,9 @@
     //[self AMKViewControllerSwitch_Test];
     //[self AMKLogManager_Test];
     //[self AMKEmojiHelper_Test];
-    [self AMKEmojiHelper_Test4];
+    //[self AMKEmojiHelper_Test4];
+    //NSLog(@"%@", [NSDictionary amk_emojiMappingOfUnicodeToCheatCodes]);
+    //NSLog(@"%@", [NSDictionary amk_emojiMappingOfCheatCodesToUnicode]);
 }
 
 #pragma mark - AMKEmoji

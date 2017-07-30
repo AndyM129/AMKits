@@ -40,7 +40,7 @@
             if ([cheatCodesArray isKindOfClass:[NSArray class]]) {
                 for (NSString *cheatCodes in cheatCodesArray) {
                     if (cheatCodes.length) {
-                        [(NSMutableDictionary *)emojiMappingOfCheatCodesToUnicode setObject:cheatCodes forKey:unicode];
+                        [(NSMutableDictionary *)emojiMappingOfCheatCodesToUnicode setObject:unicode forKey:cheatCodes];
                     }
                 }
             }
