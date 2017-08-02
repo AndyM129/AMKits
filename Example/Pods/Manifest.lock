@@ -1,6 +1,8 @@
 PODS:
-  - AMKits (0.1.1)
+  - AMKits (0.1.1):
+    - MJExtension
   - Masonry (1.0.2)
+  - MJExtension (3.0.13)
   - SVProgressHUD (2.1.2)
 
 DEPENDENCIES:
@@ -13,8 +15,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AMKits: 7882bc30e08375218fccdf85eb7150f921b03ccc
+  AMKits: cc72a74a5179d4d31f451a4788a9a5e68ae582ef
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
 PODFILE CHECKSUM: abf5d9c1c590459b786ff55c56f732fdb7816a62

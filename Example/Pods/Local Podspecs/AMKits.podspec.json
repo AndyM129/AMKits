@@ -19,10 +19,15 @@
   "platforms": {
     "ios": "8.0"
   },
+  "frameworks": "UIKit",
   "source_files": "AMKits/Classes/**/*.{h,m}",
   "resources": [
     "AMKits/Classes/**/*.{plist,jpg,png}"
   ],
   "public_header_files": "AMKits/Classes/**/*.h",
-  "frameworks": "UIKit"
+  "dependencies": {
+    "MJExtension": [
+
+    ]
+  }
 }

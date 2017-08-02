@@ -24,8 +24,17 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		96F50051B79AD388CE6C7A73 /* Pods_AMKits_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5285FA29430CC76CE0736A52 /* Pods_AMKits_Tests.framework */; };
-		A17C45271F2A285A00C402BD /* EmojiMap_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A17C45251F2A285A00C402BD /* EmojiMap_1.txt */; };
+		A102121A1F3087E1008F0C0D /* AMKEmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A10212191F3087E1008F0C0D /* AMKEmojiManager.m */; };
+		A102121B1F3087E1008F0C0D /* AMKEmojiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A10212191F3087E1008F0C0D /* AMKEmojiManager.m */; };
+		A102121E1F309C33008F0C0D /* AMKEmojiHelperDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = A102121D1F309C33008F0C0D /* AMKEmojiHelperDemo.m */; };
+		A102121F1F309C33008F0C0D /* AMKEmojiHelperDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = A102121D1F309C33008F0C0D /* AMKEmojiHelperDemo.m */; };
+		A11F01181F30AE6700B2691E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A11F01171F30AE6700B2691E /* libxml2.tbd */; };
+		A11F011A1F30B2F200B2691E /* Full Emoji List, v5.0.test.html in Resources */ = {isa = PBXBuildFile; fileRef = A11F01191F30B2F200B2691E /* Full Emoji List, v5.0.test.html */; };
+		A12DA2121F30ADF1004F280E /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = A12DA20D1F30ADF1004F280E /* TFHpple.m */; };
+		A12DA2131F30ADF1004F280E /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A12DA20F1F30ADF1004F280E /* TFHppleElement.m */; };
+		A12DA2141F30ADF1004F280E /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = A12DA2111F30ADF1004F280E /* XPathQuery.m */; };
 		A17C45281F2A285A00C402BD /* EmojiMap_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A17C45251F2A285A00C402BD /* EmojiMap_1.txt */; };
+		A1AA4ACD1F3223480085ED73 /* AMKEmojiConf.json in Resources */ = {isa = PBXBuildFile; fileRef = A1AA4ACC1F3223480085ED73 /* AMKEmojiConf.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +72,20 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99764DCD13727FF78AB237F5 /* AMKits.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AMKits.podspec; path = ../AMKits.podspec; sourceTree = "<group>"; };
+		A10212181F3087E1008F0C0D /* AMKEmojiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKEmojiManager.h; sourceTree = "<group>"; };
+		A10212191F3087E1008F0C0D /* AMKEmojiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKEmojiManager.m; sourceTree = "<group>"; };
+		A102121C1F309C33008F0C0D /* AMKEmojiHelperDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKEmojiHelperDemo.h; sourceTree = "<group>"; };
+		A102121D1F309C33008F0C0D /* AMKEmojiHelperDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKEmojiHelperDemo.m; sourceTree = "<group>"; };
+		A11F01171F30AE6700B2691E /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		A11F01191F30B2F200B2691E /* Full Emoji List, v5.0.test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Full Emoji List, v5.0.test.html"; sourceTree = "<group>"; };
+		A12DA20C1F30ADF1004F280E /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		A12DA20D1F30ADF1004F280E /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		A12DA20E1F30ADF1004F280E /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		A12DA20F1F30ADF1004F280E /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		A12DA2101F30ADF1004F280E /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		A12DA2111F30ADF1004F280E /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		A17C45251F2A285A00C402BD /* EmojiMap_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmojiMap_1.txt; sourceTree = "<group>"; };
+		A1AA4ACC1F3223480085ED73 /* AMKEmojiConf.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AMKEmojiConf.json; sourceTree = "<group>"; };
 		A648116833F7F9A2595C6F1C /* Pods-AMKits_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Tests/Pods-AMKits_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2602DFA20C17A4EE72112A4 /* Pods-AMKits_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Example/Pods-AMKits_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B560A50DE75E3C9D11EC93FF /* Pods-AMKits_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Example/Pods-AMKits_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -77,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A11F01181F30AE6700B2691E /* libxml2.tbd in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -103,6 +126,7 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for AMKits */,
+				A12DA20A1F30ADF1004F280E /* Libraries */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
@@ -122,6 +146,7 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A11F01171F30AE6700B2691E /* libxml2.tbd */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
@@ -140,6 +165,7 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* AMKViewController.h */,
 				6003F5A6195388D20070C39A /* AMKViewController.m */,
+				A14778421F305432007A3BDE /* AMKEmojiHelperDemo */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -187,6 +213,48 @@
 				0C107410F4630D5B15BCA0E0 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		A10212171F3087CC008F0C0D /* AMKEmojiManager_1 */ = {
+			isa = PBXGroup;
+			children = (
+				A10212181F3087E1008F0C0D /* AMKEmojiManager.h */,
+				A10212191F3087E1008F0C0D /* AMKEmojiManager.m */,
+				A102121C1F309C33008F0C0D /* AMKEmojiHelperDemo.h */,
+				A102121D1F309C33008F0C0D /* AMKEmojiHelperDemo.m */,
+				A11F01191F30B2F200B2691E /* Full Emoji List, v5.0.test.html */,
+				A1AA4ACC1F3223480085ED73 /* AMKEmojiConf.json */,
+			);
+			path = AMKEmojiManager_1;
+			sourceTree = "<group>";
+		};
+		A12DA20A1F30ADF1004F280E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				A12DA20B1F30ADF1004F280E /* TFhpple */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		A12DA20B1F30ADF1004F280E /* TFhpple */ = {
+			isa = PBXGroup;
+			children = (
+				A12DA20C1F30ADF1004F280E /* TFHpple.h */,
+				A12DA20D1F30ADF1004F280E /* TFHpple.m */,
+				A12DA20E1F30ADF1004F280E /* TFHppleElement.h */,
+				A12DA20F1F30ADF1004F280E /* TFHppleElement.m */,
+				A12DA2101F30ADF1004F280E /* XPathQuery.h */,
+				A12DA2111F30ADF1004F280E /* XPathQuery.m */,
+			);
+			path = TFhpple;
+			sourceTree = "<group>";
+		};
+		A14778421F305432007A3BDE /* AMKEmojiHelperDemo */ = {
+			isa = PBXGroup;
+			children = (
+				A10212171F3087CC008F0C0D /* AMKEmojiManager_1 */,
+			);
+			path = AMKEmojiHelperDemo;
 			sourceTree = "<group>";
 		};
 		A17C45261F2A285A00C402BD /* Emoji */ = {
@@ -291,10 +359,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A17C45271F2A285A00C402BD /* EmojiMap_1.txt in Resources */,
+				A1AA4ACD1F3223480085ED73 /* AMKEmojiConf.json in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				A11F011A1F30B2F200B2691E /* Full Emoji List, v5.0.test.html in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,7 +477,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A102121E1F309C33008F0C0D /* AMKEmojiHelperDemo.m in Sources */,
+				A12DA2131F30ADF1004F280E /* TFHppleElement.m in Sources */,
+				A12DA2141F30ADF1004F280E /* XPathQuery.m in Sources */,
+				A12DA2121F30ADF1004F280E /* TFHpple.m in Sources */,
 				6003F59E195388D20070C39A /* AMKAppDelegate.m in Sources */,
+				A102121A1F3087E1008F0C0D /* AMKEmojiManager.m in Sources */,
 				6003F5A7195388D20070C39A /* AMKViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
@@ -419,6 +493,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				A102121F1F309C33008F0C0D /* AMKEmojiHelperDemo.m in Sources */,
+				A102121B1F3087E1008F0C0D /* AMKEmojiManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +616,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMKits/AMKits-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "AMKits/AMKits-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
@@ -556,6 +633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMKits/AMKits-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "AMKits/AMKits-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
