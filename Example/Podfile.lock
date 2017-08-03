@@ -1,5 +1,10 @@
 PODS:
-  - AMKits (0.1.1)
+  - AMKits (2.0.0):
+    - AMKits/AMKFoundationExtensions (= 2.0.0)
+    - AMKits/AMKUIKitExtensions (= 2.0.0)
+  - AMKits/AMKFoundationExtensions (2.0.0)
+  - AMKits/AMKUIKitExtensions (2.0.0):
+    - AMKits/AMKFoundationExtensions
   - Masonry (1.0.2)
   - SVProgressHUD (2.1.2)
 
@@ -13,7 +18,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AMKits: 7882bc30e08375218fccdf85eb7150f921b03ccc
+  AMKits: e53dce34ccad84ed427cf3ed4c27c1c63889a5e8
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
 
