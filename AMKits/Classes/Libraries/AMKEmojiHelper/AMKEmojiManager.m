@@ -10,6 +10,8 @@
 #import "YYModel.h"
 
 NSString * const AMKEmojiMappingFilename = @"AMKEmojiMapping.json";
+NSString * const AMKUnicodeEmojiChartsUrl = @"http://www.unicode.org/emoji/charts/full-emoji-list.html";
+NSString * const AMKUnicodeEmojiOrderingRulesUrl = @"http://www.unicode.org/emoji/charts/emoji-ordering-rules.txt";
 NSString * const AMKEmojiManagerErrorDomain = @"com.andy.AMKEmojiManager";
 NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
 
@@ -224,12 +226,17 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
     if (progressBlock) progressBlock(NSNotFound, NSNotFound);
     
     // 联网获取全量Emoji说明
-    NSString *url = [NSString stringWithFormat:@"http://www.unicode.org/emoji/charts/full-emoji-list.html"];
+    NSString *url = [NSString stringWithFormat:AMKUnicodeEmojiChartsUrl];
     NSURL *URL = [NSURL URLWithString:url];
     NSData *htmlData = [NSData dataWithContentsOfURL:URL];
-    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+    if (!htmlData.length) {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsDataEmpty userInfo:nil];
+        completionBlock==nil ?: completionBlock(self, error);
+        return;
+    }
     
     // 解析出title
+    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
     NSArray *titleArray = [xpathParser searchWithXPathQuery:@"//head/title"];
     for (TFHppleElement *title in titleArray) {
         if (title.isTextNode) continue;
@@ -242,20 +249,31 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
     
     // 解析出当前Emoji总个数
     NSInteger currentCount = 0; //!< 当前已解析的Emoji数量
-    TFHppleElement *fullEmojiMoreInformationTable = (TFHppleElement *)[tableArray objectAtIndex:1];
-    NSArray *infoTableTrArray = fullEmojiMoreInformationTable.children;
-    for (NSInteger trIndex=infoTableTrArray.count-1; trIndex>=0; trIndex--) {
-        TFHppleElement *tr = [infoTableTrArray objectAtIndex:trIndex];
-        if (tr.isTextNode || ![tr.tagName isEqualToString:@"tr"]) continue;
-        TFHppleElement *td = tr.children.lastObject;
-        self.totals = [td.text integerValue];
-        if (progressBlock) progressBlock(self.totals, currentCount);
-        break;
+    if (tableArray.count >= 2) {
+        TFHppleElement *fullEmojiMoreInformationTable = (TFHppleElement *)[tableArray objectAtIndex:1];
+        NSArray *infoTableTrArray = fullEmojiMoreInformationTable.children;
+        for (NSInteger trIndex=infoTableTrArray.count-1; trIndex>=0; trIndex--) {
+            TFHppleElement *tr = [infoTableTrArray objectAtIndex:trIndex];
+            if (tr.isTextNode || ![tr.tagName isEqualToString:@"tr"]) continue;
+            TFHppleElement *td = tr.children.lastObject;
+            self.totals = [td.text integerValue];
+            if (progressBlock) progressBlock(self.totals, currentCount);
+            break;
+        }
+    } else {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsDataEmpty userInfo:nil];
+        NSLog(@"%@", error);
+        progressBlock==nil ?: progressBlock(NSNotFound, currentCount);
     }
     
     // 解析Emoji信息
     TFHppleElement *fullEmojiListTable = (TFHppleElement *)[tableArray firstObject];
     NSArray *fullEmojiListTableTrArray = fullEmojiListTable.children;
+    if (!fullEmojiListTable || !fullEmojiListTableTrArray.count) {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsEmojiListNotFound userInfo:nil];
+        completionBlock==nil ?: completionBlock(self, error);
+        return;
+    }
     for (TFHppleElement *tr in fullEmojiListTableTrArray) {
         if (tr.isTextNode || ![tr.tagName isEqualToString:@"tr"]) continue;
         
@@ -477,27 +495,39 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
     if (completionBlock) completionBlock(self, error);
 }
 
-- (void)reloadOrder {
+- (void)reloadOrderWithProgress:(AMKEmojiManagerReloadDataProgressBlock)progressBlock completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock {
     NSError *error = nil;
     AMKBaseEmoji *emoji = nil;
     NSInteger no = 1;
+    __block NSInteger currentCount = 0;
     
-    // 1. 根据《表情符号排序规则》排序
+    // 1. 加载《表情符号排序规则》排序
+    NSURL *URL = [NSURL URLWithString:AMKUnicodeEmojiOrderingRulesUrl];
+    NSString *text = [NSString stringWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
+    if (!text || !text.length) {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsDataEmpty userInfo:nil];
+        completionBlock==nil ?: completionBlock(self, error);
+        return;
+    }
+    
+    // 2. 根据《表情符号排序规则》排序
     BOOL(^__setEmojiNo)(NSString *, NSInteger, AMKBaseEmoji **) = ^(NSString *emojiInUnicode, NSInteger no, AMKBaseEmoji **theEmoji){
         *theEmoji = nil;
         
         for (AMKEmojiGroup *group in self.groups) {
             for (AMKEmojiSubGroup *subGroup in group.subGroups) {
                 for (AMKEmoji *emoji in subGroup.emojis) {
-
+                    
                     // 基础emoji
                     if ([emoji.unicode isEqualToString:emojiInUnicode]) {
                         emoji.no = no;
                         *theEmoji = emoji;
+                        progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
                         
                         // 当基础emoji有带色调的emoji时，将色调信息以小数位数值体现
                         for (AMKSkinTonesEmoji *skinTonesEmoji in emoji.skinTonesEmojis) {
                             skinTonesEmoji.no = emoji.no + skinTonesEmoji.skinTonesEmojiType*0.1;
+                            progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
                         }
                         return YES;
                     }
@@ -506,8 +536,6 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
         }
         return NO;
     };
-    NSURL *URL = [NSURL URLWithString:@"http://www.unicode.org/emoji/charts/emoji-ordering-rules.txt"];
-    NSString *text = [NSString stringWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
     NSArray *lines = [text componentsSeparatedByString:@"\n"];
     for (NSInteger lineIndex=0; lineIndex<lines.count; lineIndex++) {
         NSString *line = [lines objectAtIndex:lineIndex];
@@ -518,8 +546,10 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
             for (NSInteger index=2; index<line.length; index+=range.length) {
                 range = [line rangeOfComposedCharacterSequenceAtIndex:index];
                 NSString *emojiInUnicode = [line substringWithRange:range];
-                if (__setEmojiNo(emojiInUnicode, no, &emoji)) no ++;
-                NSLog(@"No.%ld\t%@", no, emojiInUnicode);
+                if (__setEmojiNo(emojiInUnicode, no, &emoji)) {
+                    no ++;
+                    NSLog(@"No.%ld\t%@", no, emojiInUnicode);
+                }
             }
         }
         // 该行的Emoji是以 << 分隔的
@@ -529,13 +559,15 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
             NSArray *emojiInUnicodes = [line componentsSeparatedByString:@" << "];
             for (NSInteger index=0; index<emojiInUnicodes.count; index++) {
                 NSString *emojiInUnicode = [emojiInUnicodes objectAtIndex:index];
-                if (__setEmojiNo(emojiInUnicode, no, &emoji)) no ++;
-                NSLog(@"No.%ld\t%@", no, emojiInUnicode);
+                if (__setEmojiNo(emojiInUnicode, no, &emoji)) {
+                    no ++;
+                    NSLog(@"No.%ld\t%@", no, emojiInUnicode);
+                }
             }
         }
     }
     
-    // 2. 查漏补缺，找出未编号的表情，以单独的号段递增补充排序
+    // 3. 查漏补缺，找出未编号的表情，以单独的号段递增补充排序
     no = 10000;
     for (AMKEmojiGroup *group in self.groups) {
         for (AMKEmojiSubGroup *subGroup in group.subGroups) {
@@ -544,14 +576,16 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
                 NSLog(@"No.%ld\t%@", no, emoji.unicode);
                 
                 emoji.no = no;
+                progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
+
                 for (AMKSkinTonesEmoji *skinTonesEmoji in emoji.skinTonesEmojis) {
                     skinTonesEmoji.no = emoji.no + skinTonesEmoji.skinTonesEmojiType*0.1;
+                    progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
                 }
                 no ++;
             }
         }
     }
-    
 }
 
 - (NSString *)description {

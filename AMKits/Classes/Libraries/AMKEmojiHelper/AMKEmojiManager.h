@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, AMKSkinTonesEmojiType) {
 };
 
 FOUNDATION_EXPORT NSString * const AMKEmojiMappingFilename;                     //!< Emoji映射文件名称
+FOUNDATION_EXPORT NSString * const AMKUnicodeEmojiChartsUrl;                    //!< Unicode® Emoji Charts 网址
+FOUNDATION_EXPORT NSString * const AMKUnicodeEmojiOrderingRulesUrl;             //!< emoji-ordering-rules.txt 网址
 FOUNDATION_EXPORT NSString * const AMKEmojiManagerErrorDomain;                  //!< 错误信息Domain
 FOUNDATION_EXPORT NSString * const AMKEmojiManagerErrorFilePathUserInfoKey;     //!< 错误信息UserInfoKey：文件路径
 
@@ -46,7 +48,10 @@ FOUNDATION_EXPORT NSString * const AMKEmojiManagerErrorFilePathUserInfoKey;     
 /** AMKEmojiManager 错误信息 */
 typedef NS_OPTIONS(NSInteger, AMKEmojiManagerErrorOptions) {
     AMKEmojiManagerErrorOptionsNone = 0,                    //! 没有错误
-    AMKEmojiManagerErrorOptionsFileNotExists = 1 << 0,      //!< 文件不存在
+    AMKEmojiManagerErrorOptionsDataEmpty = 1 << 0,          //!< 数据为空
+    AMKEmojiManagerErrorOptionsFileNotExists = 1 << 1,      //!< 文件不存在
+    AMKEmojiManagerErrorOptionsEmojiTotalsNotFound = 1 << 2,//!< 未找到Emoji表情总量
+    AMKEmojiManagerErrorOptionsEmojiListNotFound = 1 << 3,  //!< 未找到Emoji列表
 };
 
 /** AMKEmojiManager 更新Emoji进度回调 */
@@ -127,7 +132,8 @@ typedef void(^AMKEmojiManagerReloadDataCompletionBlock)(AMKEmojiManager *emojiMa
 /** 加载并解析Unicode® Emoji Charts <http://www.unicode.org/emoji/charts/index.html> 的json文件 */
 - (void)reloadDataWithContentsOfFile:(NSString *)path completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock;
 
-- (void)reloadOrder;
+- (void)reloadOrderWithProgress:(AMKEmojiManagerReloadDataProgressBlock)progressBlock
+                 completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock;;
 
 /** 保存配置文件到指定文件 */
 - (void)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock;

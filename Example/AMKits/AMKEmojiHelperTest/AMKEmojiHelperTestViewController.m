@@ -18,8 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    //[self bulidEmojiManagerFromNetWork:YES];
-    [self testHelperMethods];
+    [self bulidEmojiManagerFromNetWork:YES];
+    //[self testHelperMethods];
 }
 
 - (void)bulidEmojiManagerFromNetWork:(BOOL)fromNetWork {
@@ -39,9 +39,14 @@
                         NSString *status = [NSString stringWithFormat:@"Emoji映射更新失败: %@", error.description];
                         [SVProgressHUD showErrorWithStatus:status];
                     } else {
-                        [emojiManager reloadOrder];
-                        [SVProgressHUD showWithStatus:@"正在写入文件..."];
+                        [emojiManager reloadOrderWithProgress:^(NSInteger totals, NSInteger currentCount) {
+                            NSString *status = [NSString stringWithFormat:@"正在排序...\n(%ld/%ld)", currentCount, totals];
+                            [SVProgressHUD showProgress:1.0*currentCount/totals status:status];
+                        } completion:^(AMKEmojiManager *emojiManager, NSError *error) {
+                            [SVProgressHUD showWithStatus:@"完成排序"];
+                        }];
                         
+                        [SVProgressHUD showWithStatus:@"正在写入文件..."];
                         NSString *filename = [NSString stringWithFormat:@"%@.json", [NSDate date]];
                         NSString *filepath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
                         filepath = [filepath stringByAppendingPathComponent:filename];
