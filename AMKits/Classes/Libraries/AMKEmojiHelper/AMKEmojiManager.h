@@ -111,10 +111,7 @@ typedef void(^AMKEmojiManagerReloadDataCompletionBlock)(AMKEmojiManager *emojiMa
 
 
 
-/**
- * Emoji管理类
- * 参照：http://www.unicode.org/emoji/charts/full-emoji-list.html
- */
+/** Emoji管理类，参照：http://www.unicode.org/emoji/charts/full-emoji-list.html */
 @interface AMKEmojiManager : NSObject
 @property(nonatomic, copy) NSString *name;                              //!< 配置文件名称
 @property(nonatomic, copy) NSString *version;                           //!< 版本号
@@ -125,13 +122,14 @@ typedef void(^AMKEmojiManagerReloadDataCompletionBlock)(AMKEmojiManager *emojiMa
 /** 单例 */
 + (instancetype)defaultManager;
 
-/** 下载并解析Unicode® Emoji Charts <http://www.unicode.org/emoji/charts/index.html> */
+/** 下载并解析Unicode® Emoji Charts <http://www.unicode.org/emoji/charts/full-emoji-list.html> */
 - (void)reloadDataWithContentsOfUnicodeEmojiChartsProgress:(AMKEmojiManagerReloadDataProgressBlock)progressBlock
                                                 completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock;
 
-/** 加载并解析Unicode® Emoji Charts <http://www.unicode.org/emoji/charts/index.html> 的json文件 */
+/** 加载基于Unicode® Emoji Charts <http://www.unicode.org/emoji/charts/full-emoji-list.html> 生成的json文件 */
 - (void)reloadDataWithContentsOfFile:(NSString *)path completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock;
 
+/** 加载并基于 Emoji Ordering Rules <http://www.unicode.org/emoji/charts/emoji-ordering-rules.txt> 将Emoji排序 */
 - (void)reloadOrderWithProgress:(AMKEmojiManagerReloadDataProgressBlock)progressBlock
                  completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock;;
 
