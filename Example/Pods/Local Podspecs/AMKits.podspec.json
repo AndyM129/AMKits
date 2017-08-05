@@ -36,6 +36,24 @@
 
         ]
       }
+    },
+    {
+      "name": "AMKEmojiHelper",
+      "frameworks": "UIKit",
+      "libraries": "xml2",
+      "source_files": "AMKits/Classes/Libraries/AMKEmojiHelper/**/*.{h,m}",
+      "public_header_files": "AMKits/Classes/Libraries/AMKEmojiHelper/**/*.h",
+      "resources": [
+        "AMKits/Classes/Libraries/AMKEmojiHelper/AMKEmojiMapping.json"
+      ],
+      "dependencies": {
+        "YYModel": [
+
+        ],
+        "TFHpple": [
+
+        ]
+      }
     }
   ]
 }

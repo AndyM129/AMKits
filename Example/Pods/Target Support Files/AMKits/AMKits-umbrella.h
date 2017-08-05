@@ -10,6 +10,11 @@
 #endif
 #endif
 
+#import "AMKEmojiHelper.h"
+#import "AMKEmojiManager.h"
+#import "NSArray+AMKEmojiHelper.h"
+#import "NSDictionary+AMKEmojiHelper.h"
+#import "NSString+AMKEmojiHelper.h"
 #import "NSObject+AMKDeallocBlock.h"
 #import "NSObject+AMKLocaleDescription.h"
 #import "UIResponder+AMKResponderStandardEditActions.h"

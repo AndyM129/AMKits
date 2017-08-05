@@ -27,4 +27,18 @@ Pod::Spec.new do |s|
     uiKitExtensions.dependency 'AMKits/AMKFoundationExtensions'
   end
 
+  # AMKEmojiHelper
+  s.subspec 'AMKEmojiHelper' do |emojiHelper|
+    emojiHelper.frameworks = 'UIKit'
+    emojiHelper.libraries = "xml2"
+    emojiHelper.source_files = 'AMKits/Classes/Libraries/AMKEmojiHelper/**/*.{h,m}'
+    emojiHelper.public_header_files = 'AMKits/Classes/Libraries/AMKEmojiHelper/**/*.h'
+    emojiHelper.resources = [
+        "AMKits/Classes/Libraries/AMKEmojiHelper/AMKEmojiMapping.json",
+    ]
+    emojiHelper.dependency 'YYModel'
+    emojiHelper.dependency 'TFHpple'
+
+  end
+
 end
