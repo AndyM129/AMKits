@@ -16,14 +16,14 @@ Pod::Spec.new do |s|
   s.subspec 'AMKFoundationExtensions' do |foundationExtensions|
     foundationExtensions.frameworks = 'UIKit'
     foundationExtensions.source_files = 'AMKits/Classes/Extensions/Foundation/**/*.{h,m}'
-    foundationExtensions.public_header_files = 'AMKits/Classes/Extension/Foundation/**/*.h'
+    foundationExtensions.public_header_files = 'AMKits/Classes/Extensions/Foundation/**/*.h'
   end
 
   # AMKUIKitExtensions
   s.subspec 'AMKUIKitExtensions' do |uiKitExtensions|
     uiKitExtensions.frameworks = 'UIKit'
     uiKitExtensions.source_files = 'AMKits/Classes/Extensions/UIKit/**/*.{h,m}'
-    uiKitExtensions.public_header_files = 'AMKits/Classes/Extension/UIKit/**/*.h'
+    uiKitExtensions.public_header_files = 'AMKits/Classes/Extensions/UIKit/**/*.h'
     uiKitExtensions.dependency 'AMKits/AMKFoundationExtensions'
   end
 

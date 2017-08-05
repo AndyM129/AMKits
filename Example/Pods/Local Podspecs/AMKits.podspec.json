@@ -24,13 +24,13 @@
       "name": "AMKFoundationExtensions",
       "frameworks": "UIKit",
       "source_files": "AMKits/Classes/Extensions/Foundation/**/*.{h,m}",
-      "public_header_files": "AMKits/Classes/Extension/Foundation/**/*.h"
+      "public_header_files": "AMKits/Classes/Extensions/Foundation/**/*.h"
     },
     {
       "name": "AMKUIKitExtensions",
       "frameworks": "UIKit",
       "source_files": "AMKits/Classes/Extensions/UIKit/**/*.{h,m}",
-      "public_header_files": "AMKits/Classes/Extension/UIKit/**/*.h",
+      "public_header_files": "AMKits/Classes/Extensions/UIKit/**/*.h",
       "dependencies": {
         "AMKits/AMKFoundationExtensions": [
 
