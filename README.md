@@ -34,8 +34,7 @@ pod "AMKits"
 
 ## 0x4. Update History
 
-
-### 2017-08-05
+### 2017-08-05：发布`2.0.0`版本
 
 #### 1. 重新整理了pod组件的目录结构
 
@@ -104,11 +103,11 @@ pod "AMKits"
 
 ### 2017-07-20
 
-#### 优化 NSObject+AMKDeallocBlock.h，以支持对当前object的处理
+#### 1. 优化 NSObject+AMKDeallocBlock.h，以支持对当前object的处理
 
 
 
-### 2017-07-19
+### 2017-07-19：发布`0.1.0`版本
 
 #### 1. 搭建项目框架
 
@@ -120,7 +119,7 @@ pod "AMKits"
 
 ##### 2) 添加 NSObject+AMKLocaleDescription.h
 
-重写相关方法，使得`NSArray`、`NSDictionar`y、`NSSet`等集合类的实例在控制台输出时，能够正常的打印中文，而不是Unicode码
+重写相关方法，使得`NSArray`、`NSDictionary`、`NSSet`等集合类的实例在控制台输出时，能够正常的打印中文，而不是Unicode码
 
 ##### 3) 添加 UIViewController+AMKLifeCircleBlock.h
 
@@ -140,7 +139,7 @@ pod "AMKits"
 
 如果你有好的 idea 或 疑问，请随时提 issue 或 request。
 
-如果你在开发过程中遇到什么问题，或对iOS开发有着自己独到的见解，再或是你与我一样同为菜鸟，都可以关注或私信我的微博 [`@Developer_Andy`](http://weibo.com/u/5271489088)、[`简书`](http://www.jianshu.com/users/28d89b68984b/latest_articles)
+如果你在开发过程中遇到什么问题，或对iOS开发有着自己独到的见解，都可以关注或私信我的微博 [`@Developer_Andy`](http://weibo.com/u/5271489088)、[`简书`](http://www.jianshu.com/users/28d89b68984b/latest_articles)
 
 “Stay hungry. Stay foolish.”
 
