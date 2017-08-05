@@ -2,82 +2,95 @@
 //  NSString+AMKEmojiHelper.m
 //  Pods
 //
-//  Created by Andy on 2017/7/27.
+//  Created by Andy on 2017/8/3.
 //
 //
 
 #import "NSString+AMKEmojiHelper.h"
-#import "NSDictionary+AMKEmojiHelper.h"
+#import "NSArray+AMKEmojiHelper.h"
 
 
 @implementation NSString (AMKEmojiHelper)
 
 - (BOOL)amk_containsEmojiInUnicode {
-    __block BOOL contains = NO;
-    [self amk_stringByReplacingEmojiUnicodeWithString:^NSString *(NSString *unicode, NSString *cheatCodes, BOOL *stop) {
-        contains = YES;
-        *stop = YES;
-        return nil;
-    }];
-    return contains;
+    if (self.length) {
+        __block BOOL contains = NO;
+        [[NSArray amk_emojisOrderedDescendingByNo] enumerateObjectsUsingBlock:^(AMKBaseEmoji *emoji, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *unicode = emoji.unicode;
+            if ([self rangeOfString:unicode].location != NSNotFound) {
+                contains = YES;
+                *stop = YES;
+            }
+        }];
+        return contains;
+    }
+    return NO;
 }
 
 - (BOOL)amk_containsEmojiInCheatCodes {
-    __block BOOL contains = NO;
-    [self amk_stringByReplacingEmojiCheatCodesWithString:^NSString *(NSString *cheatCodes, NSString *unicode, BOOL *stop) {
-        contains = YES;
-        *stop = YES;
-        return nil;
-    }];
-    return contains;
+    if (self.length) {
+        __block BOOL contains = NO;
+        [[NSArray amk_emojisOrderedDescendingByNo] enumerateObjectsUsingBlock:^(AMKBaseEmoji *emoji, NSUInteger idx, BOOL * _Nonnull stop) {
+            for (NSString *cheatCodes in emoji.cheatCodes) {
+                if (cheatCodes && cheatCodes.length && [self rangeOfString:cheatCodes].location != NSNotFound) {
+                    contains = YES;
+                    *stop = YES;
+                }
+            }
+        }];
+        return contains;
+    }
+    return NO;
 }
 
-- (NSString *)amk_stringByReplacingEmojiUnicodeWithCheatCodes {
-    return [self amk_stringByReplacingEmojiUnicodeWithString:^NSString *(NSString *unicode, NSString *cheatCodes, BOOL *stop) {
+- (NSString *)amk_stringByReplacingEmojiInUnicodeWithCheatCodes {
+    return [self amk_stringByReplacingEmojiInUnicodeWithString:^NSString *(NSString *unicode, NSString *cheatCodes, BOOL *stop) {
         return cheatCodes;
     }];
 }
 
-- (NSString *)amk_stringByReplacingEmojiCheatCodesWithUnicode {
-    return [self amk_stringByReplacingEmojiCheatCodesWithString:^NSString *(NSString *cheatCodes, NSString *unicode, BOOL *stop) {
+- (NSString *)amk_stringByReplacingEmojiInCheatCodesWithUnicode {
+    return [self amk_stringByReplacingEmojiInCheatCodesWithString:^NSString *(NSString *cheatCodes, NSString *unicode, BOOL *stop) {
         return unicode;
     }];
 }
 
-- (NSString *)amk_stringByReplacingEmojiUnicodeWithString:(NSString *(^)(NSString *, NSString *, BOOL *))block {
-    if (self.length) {
+- (NSString *)amk_stringByReplacingEmojiInUnicodeWithString:(NSString *(^)(NSString *, NSString *, BOOL *))block {
+    __block NSMutableString *newText = [NSMutableString stringWithString:self];
+    if (newText.length) {
         __block NSString *withString = nil;
-        __block NSMutableString *newText = [NSMutableString stringWithString:self];
-        [[NSDictionary amk_emojiMappingOfUnicodeToCheatCodes] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [[NSArray amk_emojisOrderedDescendingByNo] enumerateObjectsUsingBlock:^(AMKBaseEmoji *emoji, NSUInteger idx, BOOL * _Nonnull stop) {
             BOOL stopReplacing = NO;
-            withString = block(key, ([obj isKindOfClass:[NSArray class]] ? [obj firstObject] : obj), &stopReplacing) ?: @"";
+            NSString *cheatCodes = emoji.cheatCodes.firstObject ?: @"";
+            NSString *unicode = emoji.unicode;
+            withString = block(unicode, cheatCodes, &stopReplacing) ?: @"";
             if (!stopReplacing) {
-                [newText replaceOccurrencesOfString:key withString:withString options:NSLiteralSearch range:NSMakeRange(0, newText.length)];
+                [newText replaceOccurrencesOfString:unicode withString:withString options:NSLiteralSearch range:NSMakeRange(0, newText.length)];
             } else {
                 *stop = YES;
             }
         }];
-        return newText;
     }
-    return self;
+    return newText;
 }
 
-- (NSString *)amk_stringByReplacingEmojiCheatCodesWithString:(NSString *(^)(NSString *, NSString *, BOOL *))block {
-    if ([self rangeOfString:@":"].location != NSNotFound) {
-        __block NSString *withString = nil;
-        __block NSMutableString *newText = [NSMutableString stringWithString:self];
-        [[NSDictionary amk_emojiMappingOfCheatCodesToUnicode] enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+- (NSString *)amk_stringByReplacingEmojiInCheatCodesWithString:(NSString *(^)(NSString *, NSString *, BOOL *))block {
+    __block NSString *withString = nil;
+    __block NSMutableString *newText = [NSMutableString stringWithString:self];
+    [[NSArray amk_emojisOrderedDescendingByNo] enumerateObjectsUsingBlock:^(AMKBaseEmoji *emoji, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (emoji.cheatCodes.count) {
             BOOL stopReplacing = NO;
-            withString = block(key, obj, &stopReplacing) ?: @"";
+            NSString *cheatCodes = emoji.cheatCodes.firstObject;
+            NSString *unicode = emoji.unicode;
+            withString = block(cheatCodes, unicode, &stopReplacing) ?: @"";
             if (!stopReplacing) {
-                [newText replaceOccurrencesOfString:key withString:withString options:NSLiteralSearch range:NSMakeRange(0, newText.length)];
+                [newText replaceOccurrencesOfString:cheatCodes withString:withString options:NSLiteralSearch range:NSMakeRange(0, newText.length)];
             } else {
                 *stop = YES;
             }
-        }];
-        return newText;
-    }
-    return self;
+        }
+    }];
+    return newText;
 }
 
 @end

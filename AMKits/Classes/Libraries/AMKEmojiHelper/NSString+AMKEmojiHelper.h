@@ -2,7 +2,7 @@
 //  NSString+AMKEmojiHelper.h
 //  Pods
 //
-//  Created by Andy on 2017/7/27.
+//  Created by Andy on 2017/8/3.
 //
 //
 
@@ -17,15 +17,15 @@
 - (BOOL)amk_containsEmojiInCheatCodes;
 
 /** 例如：将"This is a smiley face \U0001F604" 替换为 "This is a smiley face :smiley:" */
-- (NSString *)amk_stringByReplacingEmojiUnicodeWithCheatCodes;
+- (NSString *)amk_stringByReplacingEmojiInUnicodeWithCheatCodes;
 
 /** 例如：将"This is a smiley face :smiley:" 替换为 "This is a smiley face \U0001F604" */
-- (NSString *)amk_stringByReplacingEmojiCheatCodesWithUnicode;
+- (NSString *)amk_stringByReplacingEmojiInCheatCodesWithUnicode;
 
 /** 将 Unicode-emoji 替换为指定字符串 */
-- (NSString *)amk_stringByReplacingEmojiUnicodeWithString:(NSString *(^)(NSString *unicode, NSString *cheatCodes, BOOL *stop))block;
+- (NSString *)amk_stringByReplacingEmojiInUnicodeWithString:(NSString *(^)(NSString *unicode, NSString *cheatCodes, BOOL *stop))block;
 
 /** 将 CheatCodes-emoji 替换为指定字符串 */
-- (NSString *)amk_stringByReplacingEmojiCheatCodesWithString:(NSString *(^)(NSString *cheatCodes, NSString *unicode, BOOL *stop))block;
+- (NSString *)amk_stringByReplacingEmojiInCheatCodesWithString:(NSString *(^)(NSString *cheatCodes, NSString *unicode, BOOL *stop))block;
 
 @end

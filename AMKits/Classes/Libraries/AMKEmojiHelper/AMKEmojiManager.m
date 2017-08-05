@@ -1,101 +1,137 @@
 //
 //  AMKEmojiManager.m
-//  Pods
+//  AMKits
 //
-//  Created by Andy on 2017/7/27.
-//
+//  Created by Andy on 2017/8/1.
+//  Copyright © 2017年 AndyM129. All rights reserved.
 //
 
 #import "AMKEmojiManager.h"
+#import "YYModel.h"
 
+NSString * const AMKEmojiMappingFilename = @"AMKEmojiMapping.json";
+NSString * const AMKUnicodeEmojiChartsUrl = @"http://www.unicode.org/emoji/charts/full-emoji-list.html";
+NSString * const AMKUnicodeEmojiOrderingRulesUrl = @"http://www.unicode.org/emoji/charts/emoji-ordering-rules.txt";
+NSString * const AMKEmojiManagerErrorDomain = @"com.andy.AMKEmojiManager";
+NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
 
-@implementation NSString (AMKEmojiManager)
+#pragma mark - AMKBaseEmoji
 
-- (instancetype)underlineString {
-    NSString *underlineString = nil;
-    
-    if (self.length) {
-        // 若有空格，则以空格分隔，以下划线连接
-        NSArray *words = [self componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        if (words.count) {
-            NSMutableArray *lowercaseWords = [NSMutableArray arrayWithCapacity:words.count];
-            for (NSString *word in words) {
-                [lowercaseWords addObject:word.lowercaseString];
-            }
-            underlineString = [lowercaseWords componentsJoinedByString:@"_"];
-        }
-        // 否则按驼峰处理，转为一下划线连接
-        else {
-            NSMutableString *string = [NSMutableString string];
-            for (NSUInteger i = 0; i<self.length; i++) {
-                unichar c = [self characterAtIndex:i];
-                NSString *cString = [NSString stringWithFormat:@"%c", c];
-                NSString *cStringLower = [cString lowercaseString];
-                if ([cString isEqualToString:cStringLower]) {
-                    [string appendString:cStringLower];
-                } else {
-                    [string appendString:@"_"];
-                    [string appendString:cStringLower];
-                }
-            }
-            underlineString = [string copy];
-        }
+@implementation AMKBaseEmoji
+
+- (NSMutableArray<NSString *> *)cheatCodes {
+    if (!_cheatCodes) {
+        _cheatCodes = [NSMutableArray array];
     }
-    
-    /*
-    if (underlineString.length) {
-        for (NSInteger i=0; i<underlineString.length-1; i++) {
-            NSRange strRange = NSMakeRange(i, 1);
-            NSString *str = [underlineString substringWithRange:strRange];
-            if ([str isEqualToString:@"-"]) {
-                if (i>0) {
-                    if ([underlineString substringWithRange:NSMakeRange(i-1, 1)] i)
-                }
-                
-                underlineString = [underlineString stringByReplacingCharactersInRange:strRange withString:@"_"];
-            }
-        }
-    }
-    */
-    return underlineString?:self;
-}
-
-@end
-
-@implementation AMKEmoji
-
-- (NSMutableArray<NSString *> *)cheatCodesArray {
-    if (!_cheatCodesArray) {
-        _cheatCodesArray = [NSMutableArray array];
-    }
-    return _cheatCodesArray;
-}
-
-- (BOOL)addCheatCodesArrayWithArray:(NSArray *)array addedCheatCodesArray:(NSArray **)addedCheatCodesArray {
-    NSMutableArray *tempAddedCheatCodesArray = nil;
-    for (NSString *addedCheatCodes in array) {
-        if (![self.cheatCodesArray containsObject:addedCheatCodes]) {
-            [self.cheatCodesArray addObject:addedCheatCodes];
-            
-            if (!tempAddedCheatCodesArray) {
-                tempAddedCheatCodesArray = [NSMutableArray array];
-            }
-            [tempAddedCheatCodesArray addObject:addedCheatCodes];
-        }
-    }
-    *addedCheatCodesArray = tempAddedCheatCodesArray;
-    return tempAddedCheatCodesArray.count ? YES : NO;
+    return _cheatCodes;
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%@ => %@", self.unicode, [self.cheatCodesArray componentsJoinedByString:@" , "]];
+    return [NSString stringWithFormat:@"No.%g %@ (%@ - %ld) => %@", self.no, self.unicode, self.shortName, self.supportVendor, [self.cheatCodes componentsJoinedByString:@"、"]];
+}
+
+- (NSComparisonResult)compareWithNo:(AMKBaseEmoji *)emoji {
+    if (self.no > emoji.no) return NSOrderedDescending;
+    if (self.no < emoji.no) return NSOrderedAscending;
+    return NSOrderedSame;
+}
+
+#pragma mark YYModel
+
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"unicode" : @"unicode",
+             @"shortName" : @"short_name",
+             @"supportVendor" : @"support_vendor",
+             @"cheatCodes" : @"cheat_codes",
+             @"no" : @"no"};
+}
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"cheatCodes" : @"NSString"};
+}
+
++ (AMKSkinTonesEmojiType)skinTonesEmojiTypeWithEmojiInUnicode:(NSString *)unicode {
+    static NSData *dataForSkinTonesEmojiTypeLight;
+    static NSData *dataForSkinTonesEmojiTypeMediumLight;
+    static NSData *dataForSkinTonesEmojiTypeMedium;
+    static NSData *dataForSkinTonesEmojiTypeMediumDark;
+    static NSData *dataForSkinTonesEmojiTypeDark;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dataForSkinTonesEmojiTypeLight          = [@"🏻" dataUsingEncoding:NSUTF8StringEncoding];
+        dataForSkinTonesEmojiTypeMediumLight    = [@"🏼" dataUsingEncoding:NSUTF8StringEncoding];
+        dataForSkinTonesEmojiTypeMedium         = [@"🏽" dataUsingEncoding:NSUTF8StringEncoding];
+        dataForSkinTonesEmojiTypeMediumDark     = [@"🏾" dataUsingEncoding:NSUTF8StringEncoding];
+        dataForSkinTonesEmojiTypeDark           = [@"🏿" dataUsingEncoding:NSUTF8StringEncoding];
+    });
+
+    NSData *unicodeData = [unicode dataUsingEncoding:NSUTF8StringEncoding];
+    if ([unicodeData rangeOfData:dataForSkinTonesEmojiTypeLight options:NSDataSearchBackwards range:NSMakeRange(0, unicodeData.length)].location != NSNotFound) {
+        return AMKSkinTonesEmojiTypeLight;
+    }
+    if ([unicodeData rangeOfData:dataForSkinTonesEmojiTypeMediumLight options:NSDataSearchBackwards range:NSMakeRange(0, unicodeData.length)].location != NSNotFound) {
+        return AMKSkinTonesEmojiTypeMediumLight;
+    }
+    if ([unicodeData rangeOfData:dataForSkinTonesEmojiTypeMedium options:NSDataSearchBackwards range:NSMakeRange(0, unicodeData.length)].location != NSNotFound) {
+        return AMKSkinTonesEmojiTypeMedium;
+    }
+    if ([unicodeData rangeOfData:dataForSkinTonesEmojiTypeMediumDark options:NSDataSearchBackwards range:NSMakeRange(0, unicodeData.length)].location != NSNotFound) {
+        return AMKSkinTonesEmojiTypeMediumDark;
+    }
+    if ([unicodeData rangeOfData:dataForSkinTonesEmojiTypeDark options:NSDataSearchBackwards range:NSMakeRange(0, unicodeData.length)].location != NSNotFound) {
+        return AMKSkinTonesEmojiTypeDark;
+    }
+    return AMKSkinTonesEmojiTypeNormal;
 }
 
 @end
 
+#pragma mark - AMKSkinTonesEmoji
 
+@implementation AMKSkinTonesEmoji
 
-@implementation AMKEmojiCategory
+- (NSString *)description {
+    return [NSString stringWithFormat:@"No.%g %@ (%@ - %ld - %ld) => %@", self.no, self.unicode, self.shortName, self.supportVendor, self.skinTonesEmojiType, [self.cheatCodes componentsJoinedByString:@"、"]];
+}
+
+#pragma mark YYModel
+
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"skinTonesEmojiType" : @"skin_tones_emoji_type"};
+}
+
+@end
+
+#pragma mark - AMKEmoji
+
+@implementation AMKEmoji
+
+- (NSMutableArray<AMKSkinTonesEmoji *> *)skinTonesEmojis {
+    if (!_skinTonesEmojis) {
+        _skinTonesEmojis = [NSMutableArray array];
+    }
+    return _skinTonesEmojis;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"No.%g %@ (%@ - %ld) => %@, %@", self.no, self.unicode, self.shortName, self.supportVendor, [self.cheatCodes componentsJoinedByString:@"、"], self.skinTonesEmojis];
+}
+
+#pragma mark YYModel
+
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"skinTonesEmojis" : @"skin_tones_emojis"};
+}
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"skinTonesEmojis" : @"AMKSkinTonesEmoji"};
+}
+
+@end
+
+#pragma mark - AMKEmojiSubGroup
+
+@implementation AMKEmojiSubGroup
 
 - (NSMutableArray<AMKEmoji *> *)emojis {
     if (!_emojis) {
@@ -104,176 +140,470 @@
     return _emojis;
 }
 
-- (AMKEmoji *)emojiWithUnicode:(NSString *)unicode automaticallyAdd:(BOOL)automaticallyAdd {
-    if (unicode && unicode.length) {
-        // 根据unicode查找emoji
-        __block AMKEmoji *emoji = nil;
-        [self.emojis enumerateObjectsUsingBlock:^(AMKEmoji * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.unicode isEqualToString:unicode]) {
-                emoji = obj;
-                *stop = YES;
-            }
-        }];
-        
-        // 若没找到，且自动添加，则创建一个
-        if (!emoji && automaticallyAdd) {
-            emoji = [[AMKEmoji alloc] init];
-            emoji.unicode = unicode;
-            [self.emojis addObject:emoji];
-        }
-        
-        return emoji;
-    }
-    return nil;
+- (NSString *)description {
+    return [NSString stringWithFormat:@"## %@ %@", self.name, self.emojis];
 }
 
-- (NSString *)description {
-    NSMutableString *string = [NSMutableString stringWithFormat:@"[%@]\n", self.name];
-    for (AMKEmoji *emoji in self.emojis) {
-        [string appendFormat:@"%@\n", emoji];
-    }
-    return string;
+#pragma mark YYModel
+
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"name" : @"name",
+             @"emojis" : @"emojis"};
+}
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"emojis" : @"AMKEmoji"};
 }
 
 @end
 
+#pragma mark - AMKEmojiGroup
 
+@implementation AMKEmojiGroup
 
+- (NSMutableArray<AMKEmojiSubGroup *> *)subGroups {
+    if (!_subGroups) {
+        _subGroups = [NSMutableArray array];
+    }
+    return _subGroups;
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"# %@ %@", self.name, self.subGroups];
+}
+
+#pragma mark YYModel
+
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"name" : @"name",
+             @"icon" : @"icon",
+             @"subGroups" :@"sub_groups"};
+}
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"subGroups" : @"AMKEmojiSubGroup"};
+}
+
+@end
+
+#pragma mark - AMKEmojiManager
+
+#import "TFHpple.h"
 @implementation AMKEmojiManager
 
-+ (instancetype)sharedManager {
-    static AMKEmojiManager *sharedManager = nil;
-    if (!sharedManager) {
-        // 优先加载沙盒中的配置（因为可能有自定义新加的字符），若没有则加载bundle中的配置文件
-        NSString *plistPath = [self.class sandboxPathForPlist];
-        if (plistPath && plistPath.length && [[NSFileManager defaultManager] fileExistsAtPath:plistPath]) {
-            NSLog(@"加载沙盒中的Emoji配置文件：%@", plistPath);
-        } else {
-            plistPath = [self.class bundlePathForPlist];
-            NSLog(@"加载MainBundle中的Emoji配置文件：%@", plistPath);
-        }
-        sharedManager = [[AMKEmojiManager alloc] initWithContentsOfFile:plistPath];
++ (instancetype)defaultManager {
+    static AMKEmojiManager *defaultManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultManager = [[AMKEmojiManager alloc] init];
+    });
+    return defaultManager;
+}
+
+- (NSMutableArray<AMKEmojiGroup *> *)groups {
+    if (!_groups) {
+        _groups = [NSMutableArray array];
     }
-    return sharedManager;
+    return _groups;
 }
 
-+ (NSString *)filenameForPlist {
-    NSString *filename = [NSString stringWithFormat:@"%@.plist", NSStringFromClass(self.class)];
-    return filename;
-}
-
-+ (NSString *)sandboxPathForPlist {
-    NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
-    path = [path stringByAppendingPathComponent:[self.class filenameForPlist]];
-    return path;
-}
-
-+ (NSString *)bundlePathForPlist {
-    NSString *path = [[NSBundle mainBundle] pathForResource:[self.class filenameForPlist] ofType:nil inDirectory:@"Frameworks/AMKits.framework"];
-    return path;
-}
-
-- (instancetype)initWithContentsOfFile:(NSString *)path {
-    AMKEmojiManager *manager = [[AMKEmojiManager alloc] init];
+- (void)reloadDataWithContentsOfUnicodeEmojiChartsProgress:(AMKEmojiManagerReloadDataProgressBlock)progressBlock completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock {
     
-    NSArray *plist = [NSArray arrayWithContentsOfFile:path];
-    if (plist && [plist isKindOfClass:[NSArray class]]) {
-        for (NSDictionary *categoryDict in plist) {
-            AMKEmojiCategory *category = [[AMKEmojiCategory alloc] init];
-            category.name = categoryDict.allKeys.firstObject;
-            [manager.categories addObject:category];
-            for (NSArray *emojiArray in categoryDict.allValues) {
-                for (NSDictionary *emojiDict in emojiArray) {
-                    AMKEmoji *emoji = [[AMKEmoji alloc] init];
-                    emoji.unicode = emojiDict.allKeys.firstObject;
-                    [emoji.cheatCodesArray addObjectsFromArray:emojiDict[emoji.unicode]];
-                    [category.emojis addObject:emoji];
+    // 更新信息
+    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+    [format setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+    NSString *date = [format stringFromDate:[NSDate date]];
+    self.updateTime = date;
+    self.version = @"1.0";
+    
+    // 保存当前解析到的相关对象
+    NSError *error = nil;
+    AMKEmojiGroup *group = nil;
+    AMKEmojiSubGroup *subGroup = nil;
+    AMKEmoji *emoji = nil;
+    AMKSkinTonesEmoji *skinTonesEmoji = nil;
+    
+    if (progressBlock) progressBlock(NSNotFound, NSNotFound);
+    
+    // 联网获取全量Emoji说明
+    NSString *url = [NSString stringWithFormat:AMKUnicodeEmojiChartsUrl];
+    NSURL *URL = [NSURL URLWithString:url];
+    NSData *htmlData = [NSData dataWithContentsOfURL:URL];
+    if (!htmlData.length) {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsDataEmpty userInfo:nil];
+        completionBlock==nil ?: completionBlock(self, error);
+        return;
+    }
+    
+    // 解析出title
+    TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:htmlData];
+    NSArray *titleArray = [xpathParser searchWithXPathQuery:@"//head/title"];
+    for (TFHppleElement *title in titleArray) {
+        if (title.isTextNode) continue;
+        self.name = title.text;
+        break;
+    }
+    
+    // 解析Emoji说明的表格
+    NSArray *tableArray = [xpathParser searchWithXPathQuery:@"//div[@class='main']/table"];
+    
+    // 解析出当前Emoji总个数
+    NSInteger currentCount = 0; //!< 当前已解析的Emoji数量
+    if (tableArray.count >= 2) {
+        TFHppleElement *fullEmojiMoreInformationTable = (TFHppleElement *)[tableArray objectAtIndex:1];
+        NSArray *infoTableTrArray = fullEmojiMoreInformationTable.children;
+        for (NSInteger trIndex=infoTableTrArray.count-1; trIndex>=0; trIndex--) {
+            TFHppleElement *tr = [infoTableTrArray objectAtIndex:trIndex];
+            if (tr.isTextNode || ![tr.tagName isEqualToString:@"tr"]) continue;
+            TFHppleElement *td = tr.children.lastObject;
+            self.totals = [td.text integerValue];
+            if (progressBlock) progressBlock(self.totals, currentCount);
+            break;
+        }
+    } else {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsDataEmpty userInfo:nil];
+        NSLog(@"%@", error);
+        progressBlock==nil ?: progressBlock(NSNotFound, currentCount);
+    }
+    
+    // 解析Emoji信息
+    TFHppleElement *fullEmojiListTable = (TFHppleElement *)[tableArray firstObject];
+    NSArray *fullEmojiListTableTrArray = fullEmojiListTable.children;
+    if (!fullEmojiListTable || !fullEmojiListTableTrArray.count) {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsEmojiListNotFound userInfo:nil];
+        completionBlock==nil ?: completionBlock(self, error);
+        return;
+    }
+    for (TFHppleElement *tr in fullEmojiListTableTrArray) {
+        if (tr.isTextNode || ![tr.tagName isEqualToString:@"tr"]) continue;
+        
+        NSInteger tdIndex = -1;
+        for (TFHppleElement *td in tr.children) {
+            if (td.isTextNode) continue;
+            tdIndex ++;
+            
+            // 提取分组标题
+            if ([td.tagName isEqualToString:@"th"]) {
+                TFHppleElement *th = td;
+                
+                // 分组
+                if ([th.attributes[@"class"]isEqualToString:@"bighead"]) {
+                    group = [[AMKEmojiGroup alloc] init];
+                    NSMutableString *groupName = [NSMutableString string];
+                    for (TFHppleElement *tag in th.children) {
+                        [groupName appendFormat:@"%@", tag.text];
+                    }
+                    group.name = groupName;
+                    [[AMKEmojiManager defaultManager].groups addObject:group];
+                }
+                // 子分组
+                else if ([th.attributes[@"class"] isEqualToString:@"mediumhead"]) {
+                    subGroup = [[AMKEmojiSubGroup alloc] init];
+                    NSMutableString *subGroupName = [NSMutableString string];
+                    for (TFHppleElement *tag in th.children) {
+                        [subGroupName appendFormat:@"%@", tag.text];
+                    }
+                    subGroup.name = subGroupName;
+                    [group.subGroups addObject:subGroup];
+                }
+            }
+            // 提取emoji信息
+            else if ([td.tagName isEqualToString:@"td"]) {
+                if (td.isTextNode) continue;
+                
+                // unicode
+                if (tdIndex == 2) {
+                    NSString *unicode = td.text;
+                    AMKSkinTonesEmojiType skinTonesEmojiType = [AMKBaseEmoji skinTonesEmojiTypeWithEmojiInUnicode:unicode];
+                    if (skinTonesEmojiType == AMKSkinTonesEmojiTypeNormal) {
+                        skinTonesEmoji = nil;
+                        
+                        emoji = [[AMKEmoji alloc] init];
+                        emoji.unicode = unicode;
+                        [subGroup.emojis addObject:emoji];
+                    } else {
+                        skinTonesEmoji = [[AMKSkinTonesEmoji alloc] init];
+                        skinTonesEmoji.unicode = unicode;
+                        skinTonesEmoji.skinTonesEmojiType = skinTonesEmojiType;
+                        [emoji.skinTonesEmojis addObject:skinTonesEmoji];
+                    }
+                    currentCount ++;
+                    if (progressBlock) progressBlock(self.totals, currentCount);
+                }
+                // AMKEmojiSupportVendorApple
+                else if (tdIndex == 3) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorApple;
+                    }
+                }
+                // AMKEmojiSupportVendorGoogle
+                else if (tdIndex == 4) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorGoogle;
+                    }
+                }
+                // AMKEmojiSupportVendorTwitter
+                else if (tdIndex == 5) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorTwitter;
+                    }
+                }
+                // AMKEmojiSupportVendorOne
+                else if (tdIndex == 6) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorOne;
+                    }
+                }
+                // AMKEmojiSupportVendorFacebook
+                else if (tdIndex == 7) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorFacebook;
+                    }
+                }
+                // AMKEmojiSupportVendorFacebookMobile
+                else if (tdIndex == 8) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorFacebookMobile;
+                    }
+                }
+                // AMKEmojiSupportVendorSamsung
+                else if (tdIndex == 9) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorSamsung;
+                    }
+                }
+                // AMKEmojiSupportVendorWindows
+                else if (tdIndex == 10) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorWindows;
+                    }
+                }
+                // AMKEmojiSupportVendorGmail
+                else if (tdIndex == 11) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorGmail;
+                    }
+                }
+                // AMKEmojiSupportVendorSB
+                else if (tdIndex == 12) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorSB;
+                    }
+                }
+                // AMKEmojiSupportVendorDCM
+                else if (tdIndex == 13) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorDCM;
+                    }
+                }
+                // AMKEmojiSupportVendorKDDI
+                else if (tdIndex == 14) {
+                    NSString *classStr = [td.attributes objectForKey:@"class"];
+                    NSArray *classArray = [classStr componentsSeparatedByString:@" "];
+                    BOOL isGoogleSupport = [classArray containsObject:@"miss"] ? NO : YES;
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    if (isGoogleSupport) {
+                        baseEmoji.supportVendor = baseEmoji.supportVendor | AMKEmojiSupportVendorKDDI;
+                    }
+                }
+                // CLDR Short Name
+                else if (tdIndex == 15) {
+                    AMKBaseEmoji *baseEmoji = skinTonesEmoji ?: emoji;
+                    baseEmoji.shortName = td.text;
                 }
             }
         }
     }
-    return manager;
+    
+    if (completionBlock) completionBlock(self, error);
 }
 
-- (NSMutableArray<AMKEmojiCategory *> *)categories {
-    if (!_categories) {
-        _categories = [NSMutableArray array];
+- (void)reloadDataWithContentsOfFile:(NSString *)path completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock {
+    NSError *error = nil;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSString *json = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+        AMKEmojiManager *manager = [AMKEmojiManager yy_modelWithJSON:json];
+        self.name = manager.name;
+        self.version = manager.version;
+        self.updateTime = manager.updateTime;
+        self.totals = manager.totals;
+        self.groups = manager.groups;
+    } else {
+        NSDictionary *userInfo = @{AMKEmojiManagerErrorFilePathUserInfoKey: path};
+        error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsFileNotExists userInfo:userInfo];
     }
-    return _categories;
+    
+    // 返回主线程并执行回调
+    if (completionBlock) completionBlock(self, error);
 }
 
-- (AMKEmojiCategory *)categoryWithName:(NSString *)name automaticallyAdd:(BOOL)automaticallyAdd {
-    if (name && name.length) {
-        // 根据name查找category
-        __block AMKEmojiCategory *category = nil;
-        [self.categories enumerateObjectsUsingBlock:^(AMKEmojiCategory * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.name isEqualToString:name]) {
-                category = obj;
-                *stop = YES;
-            }
-        }];
+- (void)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock {
+    NSError *error = nil;
+    NSString *json = [self yy_modelToJSONString];
+    BOOL ok = [json writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (!ok) {
+        NSLog(@"Update Failed: %@", error);
+    } else {
+        NSLog(@"Update Success: %@", path);
+    }
+    
+    // 返回主线程并执行回调
+    if (completionBlock) completionBlock(self, error);
+}
+
+- (void)reloadOrderWithProgress:(AMKEmojiManagerReloadDataProgressBlock)progressBlock completion:(AMKEmojiManagerReloadDataCompletionBlock)completionBlock {
+    NSError *error = nil;
+    AMKBaseEmoji *emoji = nil;
+    NSInteger no = 1;
+    __block NSInteger currentCount = 0;
+    
+    // 1. 加载《表情符号排序规则》排序
+    NSURL *URL = [NSURL URLWithString:AMKUnicodeEmojiOrderingRulesUrl];
+    NSString *text = [NSString stringWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:&error];
+    if (!text || !text.length) {
+        NSError *error = [NSError errorWithDomain:AMKEmojiManagerErrorDomain code:AMKEmojiManagerErrorOptionsDataEmpty userInfo:nil];
+        completionBlock==nil ?: completionBlock(self, error);
+        return;
+    }
+    
+    // 2. 根据《表情符号排序规则》排序
+    BOOL(^__setEmojiNo)(NSString *, NSInteger, AMKBaseEmoji **) = ^(NSString *emojiInUnicode, NSInteger no, AMKBaseEmoji **theEmoji){
+        *theEmoji = nil;
         
-        // 若没找到，且自动添加，则创建一个
-        if (!category && automaticallyAdd) {
-            category = [[AMKEmojiCategory alloc] init];
-            category.name = name;
-            [self.categories addObject:category];
+        for (AMKEmojiGroup *group in self.groups) {
+            for (AMKEmojiSubGroup *subGroup in group.subGroups) {
+                for (AMKEmoji *emoji in subGroup.emojis) {
+                    
+                    // 基础emoji
+                    if ([emoji.unicode isEqualToString:emojiInUnicode]) {
+                        emoji.no = no;
+                        *theEmoji = emoji;
+                        progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
+                        
+                        // 当基础emoji有带色调的emoji时，将色调信息以小数位数值体现
+                        for (AMKSkinTonesEmoji *skinTonesEmoji in emoji.skinTonesEmojis) {
+                            skinTonesEmoji.no = emoji.no + skinTonesEmoji.skinTonesEmojiType*0.1;
+                            progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
+                        }
+                        return YES;
+                    }
+                }
+            }
         }
-        return category;
-    }
-    return nil;
-}
+        return NO;
+    };
+    NSArray *lines = [text componentsSeparatedByString:@"\n"];
+    for (NSInteger lineIndex=0; lineIndex<lines.count; lineIndex++) {
+        NSString *line = [lines objectAtIndex:lineIndex];
 
-- (AMKEmoji *)addEmojiWithCategoryName:(NSString *)categoryName unicode:(NSString *)unicode cheatCodesArray:(NSArray *)cheatCodesArray addedCheatCodesArray:(NSArray **)addedCheatCodesArray {
-    AMKEmojiCategory *category = [self categoryWithName:categoryName automaticallyAdd:YES];
-    AMKEmoji *emoji = [category emojiWithUnicode:unicode automaticallyAdd:YES];
-    [emoji addCheatCodesArrayWithArray:cheatCodesArray addedCheatCodesArray:addedCheatCodesArray];
-    return emoji;
-}
-
-- (AMKEmoji *)addEmojiWithUnicode:(NSString *)unicode cheatCodesArray:(NSArray *)cheatCodesArray defaultCategoryName:(NSString **)defaultCategoryName addedCheatCodesArray:(NSArray **)addedCheatCodesArray {
-    AMKEmoji *emoji = nil;
-    for (AMKEmojiCategory *category in self.categories) {
-        emoji = [category emojiWithUnicode:unicode automaticallyAdd:NO];
-        if (emoji) {
-            *defaultCategoryName = [category.name copy];
-            [emoji addCheatCodesArrayWithArray:cheatCodesArray addedCheatCodesArray:addedCheatCodesArray];
-            break;
+        // 该行的每个字是一个Emoji
+        if ([line hasPrefix:@"<*"]) {
+            NSRange range;
+            for (NSInteger index=2; index<line.length; index+=range.length) {
+                range = [line rangeOfComposedCharacterSequenceAtIndex:index];
+                NSString *emojiInUnicode = [line substringWithRange:range];
+                if (__setEmojiNo(emojiInUnicode, no, &emoji)) {
+                    no ++;
+                    NSLog(@"No.%ld\t%@", no, emojiInUnicode);
+                }
+            }
+        }
+        // 该行的Emoji是以 << 分隔的
+        else if ([line hasPrefix:@"< "]) {
+            line = [line substringFromIndex:2];
+            line = [line stringByReplacingOccurrencesOfString:@"=" withString:@"<<"];
+            NSArray *emojiInUnicodes = [line componentsSeparatedByString:@" << "];
+            for (NSInteger index=0; index<emojiInUnicodes.count; index++) {
+                NSString *emojiInUnicode = [emojiInUnicodes objectAtIndex:index];
+                if (__setEmojiNo(emojiInUnicode, no, &emoji)) {
+                    no ++;
+                    NSLog(@"No.%ld\t%@", no, emojiInUnicode);
+                }
+            }
         }
     }
     
-    if (!emoji) {
-        AMKEmojiCategory *category = [self categoryWithName:*defaultCategoryName automaticallyAdd:YES];
-        AMKEmoji *emoji = [category emojiWithUnicode:unicode automaticallyAdd:YES];
-        [emoji addCheatCodesArrayWithArray:cheatCodesArray addedCheatCodesArray:addedCheatCodesArray];
-    }
-    return emoji;
-}
+    // 3. 查漏补缺，找出未编号的表情，以单独的号段递增补充排序
+    no = 10000;
+    for (AMKEmojiGroup *group in self.groups) {
+        for (AMKEmojiSubGroup *subGroup in group.subGroups) {
+            for (AMKEmoji *emoji in subGroup.emojis) {
+                if (emoji.no > 0) continue;
+                NSLog(@"No.%ld\t%@", no, emoji.unicode);
+                
+                emoji.no = no;
+                progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
 
-
-
-- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile {
-    NSMutableArray *rootArray = [NSMutableArray arrayWithCapacity:self.categories.count];
-    for (AMKEmojiCategory *category in self.categories) {
-        NSMutableArray *categoryArray = [NSMutableArray arrayWithCapacity:category.emojis.count];
-        [rootArray addObject:@{category.name: categoryArray}];
-        for (AMKEmoji *emoji in category.emojis) {
-            [categoryArray addObject:@{emoji.unicode: emoji.cheatCodesArray}];
+                for (AMKSkinTonesEmoji *skinTonesEmoji in emoji.skinTonesEmojis) {
+                    skinTonesEmoji.no = emoji.no + skinTonesEmoji.skinTonesEmojiType*0.1;
+                    progressBlock == nil ?: progressBlock(self.totals, ++currentCount);
+                }
+                no ++;
+            }
         }
     }
-    if (!path || !path.length) path = [self.class sandboxPathForPlist];
-    BOOL successfully = [rootArray writeToFile:path atomically:useAuxiliaryFile];
-    NSLog(@"【%@】保存配置到：%@", (successfully?@"成功":@"失败"), path);
-    return successfully;
 }
 
 - (NSString *)description {
-    NSMutableString *string = [NSMutableString stringWithFormat:@""];
-    for (AMKEmojiCategory *category in self.categories) {
-        [string appendFormat:@"%@\n\n", category];
-    }
-    return string;
+    return [NSString stringWithFormat:@"name: %@\nversion: %@\nupdateTime: %@\ntotals: %ld%@", self.name, self.version, self.updateTime, self.totals, self.groups];
+}
+
+#pragma mark YYModel
+
++ (NSDictionary *)modelCustomPropertyMapper {
+    return @{@"name" : @"name",
+             @"version" : @"version",
+             @"updateTime" :@"update_time",
+             @"totals" : @"totals",
+             @"groups" : @"groups"};
+}
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"groups" : @"AMKEmojiGroup"};
 }
 
 @end
-

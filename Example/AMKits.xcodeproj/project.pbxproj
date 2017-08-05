@@ -24,6 +24,7 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		96F50051B79AD388CE6C7A73 /* Pods_AMKits_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5285FA29430CC76CE0736A52 /* Pods_AMKits_Tests.framework */; };
+		A15B14DC1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A15B14DB1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.m */; };
 		A17C45271F2A285A00C402BD /* EmojiMap_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A17C45251F2A285A00C402BD /* EmojiMap_1.txt */; };
 		A17C45281F2A285A00C402BD /* EmojiMap_1.txt in Resources */ = {isa = PBXBuildFile; fileRef = A17C45251F2A285A00C402BD /* EmojiMap_1.txt */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,8 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		99764DCD13727FF78AB237F5 /* AMKits.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AMKits.podspec; path = ../AMKits.podspec; sourceTree = "<group>"; };
+		A15B14DA1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMKEmojiHelperTestViewController.h; sourceTree = "<group>"; };
+		A15B14DB1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMKEmojiHelperTestViewController.m; sourceTree = "<group>"; };
 		A17C45251F2A285A00C402BD /* EmojiMap_1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmojiMap_1.txt; sourceTree = "<group>"; };
 		A648116833F7F9A2595C6F1C /* Pods-AMKits_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Tests/Pods-AMKits_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B2602DFA20C17A4EE72112A4 /* Pods-AMKits_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMKits_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMKits_Example/Pods-AMKits_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* AMKViewController.h */,
 				6003F5A6195388D20070C39A /* AMKViewController.m */,
+				A15B14D61F344A92001DBBA0 /* AMKEmojiHelperTest */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -187,6 +191,15 @@
 				0C107410F4630D5B15BCA0E0 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		A15B14D61F344A92001DBBA0 /* AMKEmojiHelperTest */ = {
+			isa = PBXGroup;
+			children = (
+				A15B14DA1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.h */,
+				A15B14DB1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.m */,
+			);
+			path = AMKEmojiHelperTest;
 			sourceTree = "<group>";
 		};
 		A17C45261F2A285A00C402BD /* Emoji */ = {
@@ -409,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* AMKAppDelegate.m in Sources */,
+				A15B14DC1F344ADC001DBBA0 /* AMKEmojiHelperTestViewController.m in Sources */,
 				6003F5A7195388D20070C39A /* AMKViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

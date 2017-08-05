@@ -2,12 +2,12 @@
 //  NSDictionary+AMKEmojiHelper.m
 //  Pods
 //
-//  Created by Andy on 2017/7/27.
+//  Created by Andy on 2017/8/3.
 //
 //
 
 #import "NSDictionary+AMKEmojiHelper.h"
-#import "AMKEmojiManager.h"
+#import "NSArray+AMKEmojiHelper.h"
 
 
 @implementation NSDictionary (AMKEmojiHelper)
@@ -17,37 +17,29 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         mapping = [NSMutableDictionary dictionary];
-        for (AMKEmojiCategory *category in [AMKEmojiManager sharedManager].categories) {
-            for (AMKEmoji *emoji in category.emojis) {
-                [(NSMutableDictionary *)mapping setObject:emoji.cheatCodesArray forKey:emoji.unicode];
-            }
+        for (AMKBaseEmoji *emoji in [NSArray amk_emojisOrderedAscendingByNo]) {
+            [(NSMutableDictionary *)mapping setObject:emoji.cheatCodes.firstObject?:@"" forKey:emoji.unicode];
         }
+        mapping = [NSDictionary dictionaryWithDictionary:mapping];
     });
     return mapping;
 }
 
 + (NSDictionary *)amk_emojiMappingOfCheatCodesToUnicode {
-    static NSDictionary *emojiMappingOfCheatCodesToUnicode = nil;
+    static NSDictionary *mapping = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSDictionary *emojiMappingOfUnicodeToCheatCodes = [NSDictionary amk_emojiMappingOfUnicodeToCheatCodes];
-        emojiMappingOfCheatCodesToUnicode = [NSMutableDictionary dictionaryWithCapacity:emojiMappingOfUnicodeToCheatCodes.count];
-        [emojiMappingOfUnicodeToCheatCodes enumerateKeysAndObjectsUsingBlock:^(NSString *unicode, NSArray *cheatCodesArray, BOOL *stop) {
-            if (![cheatCodesArray isKindOfClass:[NSArray class]]) {
-                cheatCodesArray = @[cheatCodesArray];
-            }
-            
-            if ([cheatCodesArray isKindOfClass:[NSArray class]]) {
-                for (NSString *cheatCodes in cheatCodesArray) {
-                    if (cheatCodes.length) {
-                        [(NSMutableDictionary *)emojiMappingOfCheatCodesToUnicode setObject:unicode forKey:cheatCodes];
-                    }
+        mapping = [NSMutableDictionary dictionary];
+        for (AMKBaseEmoji *emoji in [NSArray amk_emojisOrderedAscendingByNo]) {
+            for (NSString *cheatCodes in emoji.cheatCodes) {
+                if (cheatCodes && cheatCodes.length) {
+                    [(NSMutableDictionary *)mapping setObject:emoji.unicode forKey:cheatCodes];
                 }
             }
-        }];
-        emojiMappingOfCheatCodesToUnicode = [NSDictionary dictionaryWithDictionary:emojiMappingOfCheatCodesToUnicode];
+        }
+        mapping = [NSDictionary dictionaryWithDictionary:mapping];
     });
-    return emojiMappingOfCheatCodesToUnicode;
+    return mapping;
 }
 
 @end

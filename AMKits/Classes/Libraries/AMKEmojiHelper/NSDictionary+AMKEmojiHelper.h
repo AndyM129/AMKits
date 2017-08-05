@@ -2,7 +2,7 @@
 //  NSDictionary+AMKEmojiHelper.h
 //  Pods
 //
-//  Created by Andy on 2017/7/27.
+//  Created by Andy on 2017/8/3.
 //
 //
 
