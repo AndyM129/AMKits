@@ -1,13 +1,13 @@
 PODS:
-  - AMKits (2.0.0):
-    - AMKits/AMKEmojiHelper (= 2.0.0)
-    - AMKits/AMKFoundationExtensions (= 2.0.0)
-    - AMKits/AMKUIKitExtensions (= 2.0.0)
-  - AMKits/AMKEmojiHelper (2.0.0):
+  - AMKits (2.0.1):
+    - AMKits/AMKEmojiHelper (= 2.0.1)
+    - AMKits/AMKFoundationExtensions (= 2.0.1)
+    - AMKits/AMKUIKitExtensions (= 2.0.1)
+  - AMKits/AMKEmojiHelper (2.0.1):
     - TFHpple
     - YYModel
-  - AMKits/AMKFoundationExtensions (2.0.0)
-  - AMKits/AMKUIKitExtensions (2.0.0):
+  - AMKits/AMKFoundationExtensions (2.0.1)
+  - AMKits/AMKUIKitExtensions (2.0.1):
     - AMKits/AMKFoundationExtensions
   - Masonry (1.0.2)
   - SVProgressHUD (2.1.2)
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AMKits: 974f3d2c495ae4bb0fef71deede198b754129aed
+  AMKits: 6a3e2d802bb338d701e7ddc6f4433c3505fe7991
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TFHpple: a916fe0799eb30aa29b2670d14d5868cdd3a5b81
