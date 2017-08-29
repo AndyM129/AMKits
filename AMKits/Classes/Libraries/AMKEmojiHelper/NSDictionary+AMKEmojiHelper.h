@@ -11,9 +11,9 @@
 @interface NSDictionary (AMKEmojiHelper)
 
 /** Emoji 从 Unicode 到 CheatCode 的映射表 */
-+ (NSDictionary *)amk_emojiMappingOfUnicodeToCheatCodes;
++ (NSDictionary<NSString *, NSString *> *)amk_emojiMappingOfUnicodeToCheatCodes;
 
 /** Emoji 从 CheatCode 到 Unicode 的映射表 */
-+ (NSDictionary *)amk_emojiMappingOfCheatCodesToUnicode;
++ (NSDictionary<NSString *, NSString *> *)amk_emojiMappingOfCheatCodesToUnicode;
 
 @end

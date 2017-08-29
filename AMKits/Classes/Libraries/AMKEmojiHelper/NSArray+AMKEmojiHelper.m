@@ -32,7 +32,22 @@
     return emojis;
 }
 
-+ (NSArray<AMKBaseEmoji *> *)amk_emojisOrderedAscendingByNo {
++ (NSArray<AMKBaseEmoji *> *)amk_sortedEmojis {
+    static NSArray<AMKBaseEmoji *> *emojis = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        emojis = [[self.class amk_emojis] sortedArrayUsingComparator:^NSComparisonResult(AMKBaseEmoji *emoji1, AMKBaseEmoji *emoji2) {
+            if (emoji1.unicode.length > emoji2.unicode.length) return NSOrderedAscending;
+            if (emoji1.unicode.length < emoji2.unicode.length) return NSOrderedDescending;
+            if (emoji1.no > emoji2.no) return NSOrderedAscending;
+            if (emoji1.no < emoji2.no) return NSOrderedDescending;
+            return NSOrderedSame;
+        }];
+    });
+    return emojis;
+}
+
++ (NSArray<AMKBaseEmoji *> *)amk_sortedEmojisAscendingByNo {
     static NSArray<AMKBaseEmoji *> *emojis = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -45,7 +60,7 @@
     return [emojis copy];
 }
 
-+ (NSArray<AMKBaseEmoji *> *)amk_emojisOrderedDescendingByNo {
++ (NSArray<AMKBaseEmoji *> *)amk_sortedEmojisDescendingByNo {
     static NSArray<AMKBaseEmoji *> *emojis = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

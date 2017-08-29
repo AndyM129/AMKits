@@ -16,6 +16,12 @@
 /** 是否包含 CheatCodes-emoji */
 - (BOOL)amk_containsEmojiInCheatCodes;
 
+/** 例如：将"This is a smiley face \U0001F604" 替换为 "" */
+- (NSString *)amk_stringByRemovingEmojiInUnicode;
+
+/** 例如：将"This is a smiley face :smiley:" 替换为 "" */
+- (NSString *)amk_stringByRemovingEmojiInCheatCodes;
+
 /** 例如：将"This is a smiley face \U0001F604" 替换为 "This is a smiley face :smiley:" */
 - (NSString *)amk_stringByReplacingEmojiInUnicodeWithCheatCodes;
 

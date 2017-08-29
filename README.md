@@ -34,6 +34,12 @@ pod "AMKits"
 
 ## 0x4. Update History
 
+### 2017-08-29：发布`2.0.1`版本
+
+#### 1. 优化`AMKEmojiHelper`库对Emoji表情的处理
+
+
+
 ### 2017-08-05：发布`2.0.0`版本
 
 #### 1. 重新整理了pod组件的目录结构
@@ -61,10 +67,10 @@ pod "AMKits"
 + (NSArray<AMKBaseEmoji *> *)amk_emojis;
 
 /** 获取所有已根据编号升序排序EmojiModel的数组 */
-+ (NSArray<AMKBaseEmoji *> *)amk_emojisOrderedAscendingByNo;
++ (NSArray<AMKBaseEmoji *> *)amk_sortedEmojisAscendingByNo;
 
 /** 获取所有已根据编号降序排序EmojiModel的数组 */
-+ (NSArray<AMKBaseEmoji *> *)amk_emojisOrderedDescendingByNo;
++ (NSArray<AMKBaseEmoji *> *)amk_sortedEmojisDescendingByNo;
 ```
 
 ##### 4) 添加 `NSDictionary+AMKEmojiHelper.h`

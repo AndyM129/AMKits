@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class AMKEmojiManager;
-
+static BOOL kAMKEmojiManagerDebugEnable = NO;      //!< debug开关
 
 /** 各平台的支持情况 */
 typedef NS_OPTIONS(NSInteger, AMKEmojiSupportVendor) {
