@@ -196,6 +196,11 @@ NSString * const AMKEmojiManagerErrorFilePathUserInfoKey = @"filePath";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         defaultManager = [[AMKEmojiManager alloc] init];
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:AMKEmojiMappingFilename ofType:nil];
+        [defaultManager reloadDataWithContentsOfFile:path completion:^(AMKEmojiManager *emojiManager, NSError *error) {
+            NSLog(@"Emoji映射加载完毕: %@", path);
+        }];
     });
     return defaultManager;
 }

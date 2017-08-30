@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'AMKits'
-  s.version          = '2.0.1'
+  s.version          = '2.0.2'
   s.summary          = 'Summary of AMKits.'
   s.description      = <<-DESC
                         A description of AMKits.
